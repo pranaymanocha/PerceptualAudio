@@ -1,2 +1,4 @@
 # PerceptualAudio
-ABCDEF
+A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES
+
+This is a Tensorflow implementation of our paper
