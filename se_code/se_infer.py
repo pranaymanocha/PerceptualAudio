@@ -1,4 +1,4 @@
-from model import *
+from network_model import *
 from data_import import *
 from network_model import *
 
@@ -10,9 +10,8 @@ def argument_parser():
     Get an argument parser for a training script.
     """
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--model_folder', help='path of the SE model parameters saved location (without the / at the end )', default='')
-    parser.add_argument('--model_name', help='name of the SE model used for infer', default='')
-    parser.add_argument('--time_from_epoch_in_sec', help='seconds since epoch', default='')
+    parser.add_argument('--model_folder', help='full path of the se model parameter', default='../pre-model/se_model/se_model.ckpt')
+    parser.add_argument('--model_name', help='name of the SE model used for infer', default='m1')
     return parser
 
 args = argument_parser().parse_args()
@@ -60,7 +59,7 @@ sess.run(tf.global_variables_initializer())
 print "Session initialized"
 
 saver = tf.train.Saver([var for var in tf.trainable_variables() if var.name.startswith("se_")])
-saver.restore(sess, str(modfolder)+"/se_model_"+str(args.time_from_epoch_inSEC)+".ckpt")
+saver.restore(sess, str(modfolder))
 
 #####################################################################################
 
