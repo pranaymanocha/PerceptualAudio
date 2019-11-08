@@ -16,7 +16,7 @@ Create a folder "dataset" inside se_code where you should have the SE dataset
 
 (Follow [this]((https://github.com/francoisgermain/SpeechDenoisingWithDeepFeatureLosses)) for how to download and resample the dataset. Resample the dataset to 16KHz).
 
-The se_infer.py file needs 3 arguments:
+The se_infer.py file needs 2 arguments:
 1) path of the SE model to be loaded. (ex - ../pre-model/se_model/se_model.ckpt)
 2) actual model name that you are loading. (for ex - m1)
 
