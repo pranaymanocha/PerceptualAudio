@@ -17,8 +17,6 @@ def argument_parser():
     parser.add_argument('--model_folder', help='path of the loss model parameters saved location (without the / at the end )', default='')
     parser.add_argument('--learning_rate', help='learning rate', default=1e-4,type=float)
     parser.add_argument('--feature_loss_layers', help='number of feature loss layers used', default=14,type=int)
-    parser.add_argument('--train_from_checkpoint', help='train_from_checkpoint',default=0,type=int)
-    parser.add_argument('--checkpoint_time_from_epoch_inSEC', help='time_from_EPOCH_insec',default='')
     parser.add_argument('--kernel_size', help='kernel convolution size',default=3,type=int)
     
     return parser
@@ -62,9 +60,15 @@ with tf.variable_scope(tf.get_variable_scope()):
         loss_fn = l2_loss(clean, enhanced)
     else: # FEATURE LOSS
         keep_prob = tf.placeholder_with_default(1.0, shape=())
-        enhanced,sum_total = featureloss(clean,enhanced,keep_prob,loss_layers=SE_LOSS_LAYERS,n_layers=LOSS_LAYERS, norm_type=LOSS_NORM, base_channels=LOSS_BASE_CHANNELS,blk_channels=LOSS_BLK_CHANNELS,ksz=args.kernel_size)
-        distance = sum_total
-        loss_fn = distance
+        
+        if args.type=='pretrained':
+            enhanced,sum_total = featureloss_pretrained(clean,enhanced,keep_prob,loss_layers=SE_LOSS_LAYERS,n_layers=LOSS_LAYERS, norm_type=LOSS_NORM, base_channels=LOSS_BASE_CHANNELS,blk_channels=LOSS_BLK_CHANNELS,ksz=args.kernel_size)
+            distance = sum_total
+            loss_fn = distance
+        else:
+            enhanced,sum_total = featureloss(clean,enhanced,keep_prob,loss_layers=SE_LOSS_LAYERS,n_layers=LOSS_LAYERS, norm_type=LOSS_NORM, base_channels=LOSS_BASE_CHANNELS,blk_channels=LOSS_BLK_CHANNELS,ksz=args.kernel_size)
+            distance = sum_total
+            loss_fn = distance
         
 # LOAD DATA
 trainset, valset = load_full_data_list(datafolder = datafolder)
@@ -105,8 +109,12 @@ print("Session initialized")
 
 # LOAD FEATURE LOSS
 if SE_LOSS_TYPE == "FL":
-    loss_saver = tf.train.Saver([var for var in tf.trainable_variables() if (var.name.startswith("loss_") or var.name=="weights")])
-    loss_saver.restore(sess, "%s/my_test_model" % modfolder)
+    if args.pretrained=='pretrained':
+        loss_saver = tf.train.Saver([var for var in tf.trainable_variables() if (var.name.startswith("loss_") or var.name=="weights")])
+        loss_saver.restore(sess, "%s/loss_model.ckpt" % modfolder)
+    else:
+        loss_saver = tf.train.Saver([var for var in tf.trainable_variables() if (var.name.startswith("loss_") or var.name=="weights")])
+        loss_saver.restore(sess, "%s/my_test_model" % modfolder)
 
 Nepochs = 400
 saver = tf.train.Saver(var_list=[var for var in tf.trainable_variables() if var.name.startswith("se_")])
@@ -120,12 +128,7 @@ else:
     loss_train = np.zeros((len(trainset["innames"]),1))
     loss_val = np.zeros((len(valset["innames"]),1))
     
-if args.train_from_checkpoint==1:
-    #load from the previous weights at outfolder
-    saver.restore(sess, "%s/se_model_"+str(args.time_from_epoch_inSEC)+".ckpt" % outfolder)
-    print('Loaded Checkpoint')
-else:
-    os.mkdir(os.path.join('summaries',outfolder))
+os.mkdir(os.path.join('summaries',outfolder))
     
 #####################################################################################
 summ_writer = tf.summary.FileWriter(os.path.join('summaries',outfolder), sess.graph)

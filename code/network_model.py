@@ -59,3 +59,21 @@ def featureloss(target, current, keep_prob ,loss_layers, n_layers=14, norm_type=
         loss_vec.append(loss_result)
         loss_vec[0]+=loss_result
     return loss_vec[1:],loss_vec[0]
+
+def featureloss_pretrained(target, current, keep_prob ,loss_layers, n_layers=14, norm_type="SBN", base_channels=32, blk_channels=5,ksz=3):
+    
+    feat_current = lossnet(current, reuse=False, n_layers=n_layers, norm_type=norm_type,
+                         base_channels=base_channels, blk_channels=blk_channels,training=False,ksz=ksz,keep_prob=keep_prob)
+
+    feat_target = lossnet(target, reuse=True, n_layers=n_layers, norm_type=norm_type,
+                         base_channels=base_channels, blk_channels=blk_channels,training=False,ksz=ksz,keep_prob=keep_prob)
+    
+
+    loss_vec = [0]
+    for id in range(loss_layers):
+        loss_vec.append(l1_loss(feat_current[id], feat_target[id]))
+
+    for id in range(1,loss_layers+1):
+        loss_vec[0] += loss_vec[id]
+
+    return loss_vec[0],loss_vec[0]
