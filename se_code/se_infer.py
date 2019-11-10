@@ -11,7 +11,8 @@ def argument_parser():
     """
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--model_folder', help='full path of the se model parameter', default='../pre-model/se_model/se_model.ckpt')
-    parser.add_argument('--model_name', help='name of the SE model used for infer', default='m1')
+    parser.add_argument('--model_name', help='name of the SE model used for infer', default='m_sample')
+    
     return parser
 
 args = argument_parser().parse_args()

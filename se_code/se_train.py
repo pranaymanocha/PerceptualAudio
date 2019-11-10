@@ -184,7 +184,6 @@ for epoch in range(1,Nepochs+1):
 
         # SAVE ITERATION LOSS
         loss_val[id,0] = loss_vec
-
     
     # PRINT VALIDATION EPOCH LOSS AVERAGE
     str1 = "V: %d " % (epoch)
@@ -192,7 +191,7 @@ for epoch in range(1,Nepochs+1):
         str1 += ", %10.6e"%(np.mean(loss_val, axis=0)[0])
     else:
         str1 += ", %10.6e"%(np.mean(loss_val, axis=0)[0])
-
+    
     summ_train = sess.run(performance_summaries_train, feed_dict={tf_loss_ph_train:np.mean(loss_train, axis=0)[0]})
     summ_writer.add_summary(summ_train, epoch)
 
