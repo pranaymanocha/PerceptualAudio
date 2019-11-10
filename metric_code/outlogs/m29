@@ -1,0 +1,549 @@
+Loading files..
+Prefetching the Combined
+Prefetching the Linear Noises
+Prefetching the EQ
+Loading files..
+Skip->next
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 0 Train Loss 0.694721036546
+Epoch 1 Train Loss 0.69328592715
+Epoch 2 Train Loss 0.693285060228
+Epoch 3 Train Loss 0.693284533054
+Epoch 4 Train Loss 0.693286836461
+Epoch 5 Train Loss 0.693284022216
+Epoch 6 Train Loss 0.693283765918
+Epoch 7 Train Loss 0.693283517934
+Epoch 8 Train Loss 0.693283274853
+Epoch 9 Train Loss 0.693294484256
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 10 Train Loss 0.693282866225
+Epoch 11 Train Loss 0.693290357549
+Epoch 12 Train Loss 0.693282510682
+Epoch 13 Train Loss 0.693282333989
+Epoch 14 Train Loss 0.693282107123
+Epoch 15 Train Loss 0.693281882003
+Epoch 16 Train Loss 0.693281661998
+Epoch 17 Train Loss 0.693281512632
+Epoch 18 Train Loss 0.693281284959
+Epoch 19 Train Loss 0.693281059322
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 20 Train Loss 0.693280832789
+Epoch 21 Train Loss 0.693280608223
+Epoch 22 Train Loss 0.693280382884
+Epoch 23 Train Loss 0.693280157398
+Epoch 24 Train Loss 0.6932799299
+Epoch 25 Train Loss 0.693279704039
+Epoch 26 Train Loss 0.693279478569
+Epoch 27 Train Loss 0.693279252273
+Epoch 28 Train Loss 0.693279028757
+Epoch 29 Train Loss 0.693278802054
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 30 Train Loss 0.693278696656
+Epoch 31 Train Loss 0.693278429645
+Epoch 32 Train Loss 0.693278202261
+Epoch 33 Train Loss 0.693277975122
+Epoch 34 Train Loss 0.693277748096
+Epoch 35 Train Loss 0.693277521348
+Epoch 36 Train Loss 0.693277292523
+Epoch 37 Train Loss 0.693277063628
+Epoch 38 Train Loss 0.693276834547
+Epoch 39 Train Loss 0.693276601751
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 40 Train Loss 0.693276372348
+Epoch 41 Train Loss 0.693276139744
+Epoch 42 Train Loss 0.693275887481
+Epoch 43 Train Loss 0.693275709636
+Epoch 44 Train Loss 0.693275470635
+Epoch 45 Train Loss 0.693275236944
+Epoch 46 Train Loss 0.693274998733
+Epoch 47 Train Loss 0.693274760278
+Epoch 48 Train Loss 0.693274518907
+Epoch 49 Train Loss 0.693274277459
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 50 Train Loss 0.693274031377
+Epoch 51 Train Loss 0.693273785723
+Epoch 52 Train Loss 0.693273535317
+Epoch 53 Train Loss 0.693273283404
+Epoch 54 Train Loss 0.693273028685
+Epoch 55 Train Loss 0.693272770086
+Epoch 56 Train Loss 0.693272509097
+Epoch 57 Train Loss 0.693272244268
+Epoch 58 Train Loss 0.693271975229
+Epoch 59 Train Loss 0.693271702113
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 60 Train Loss 0.693271427492
+Epoch 61 Train Loss 0.693271124847
+Epoch 62 Train Loss 0.693270898277
+Epoch 63 Train Loss 0.693270606057
+Epoch 64 Train Loss 0.693270310008
+Epoch 65 Train Loss 0.693270010686
+Epoch 66 Train Loss 0.693269700533
+Epoch 67 Train Loss 0.693269385143
+Epoch 68 Train Loss 0.69326905827
+Epoch 69 Train Loss 0.693272953966
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 70 Train Loss 0.693261408935
+Epoch 71 Train Loss 0.693258909498
+Epoch 72 Train Loss 0.693258829721
+Epoch 73 Train Loss 0.693258746186
+Epoch 74 Train Loss 0.693258661991
+Epoch 75 Train Loss 0.693258580211
+Epoch 76 Train Loss 0.693258496794
+Epoch 77 Train Loss 0.693258415168
+Epoch 78 Train Loss 0.693258331258
+Epoch 79 Train Loss 0.693258251697
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 80 Train Loss 0.693258169575
+Epoch 81 Train Loss 0.693258087265
+Epoch 82 Train Loss 0.69325800772
+Epoch 83 Train Loss 0.693257926217
+Epoch 84 Train Loss 0.693257845512
+Epoch 85 Train Loss 0.693257766757
+Epoch 86 Train Loss 0.693257688193
+Epoch 87 Train Loss 0.693257609052
+Epoch 88 Train Loss 0.693257530655
+Epoch 89 Train Loss 0.693257453008
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 90 Train Loss 0.693257375674
+Epoch 91 Train Loss 0.693257298214
+Epoch 92 Train Loss 0.693262607898
+Epoch 93 Train Loss 0.693256646309
+Epoch 94 Train Loss 0.693256883543
+Epoch 95 Train Loss 0.693256850911
+Epoch 96 Train Loss 0.693256777315
+Epoch 97 Train Loss 0.693256706626
+Epoch 98 Train Loss 0.693256635971
+Epoch 99 Train Loss 0.693256564492
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 100 Train Loss 0.693256495058
+Epoch 101 Train Loss 0.693256426426
+Epoch 102 Train Loss 0.693256357407
+Epoch 103 Train Loss 0.693256288685
+Epoch 104 Train Loss 0.693256220518
+Epoch 105 Train Loss 0.693256150065
+Epoch 106 Train Loss 0.693256081417
+Epoch 107 Train Loss 0.693256012944
+Epoch 108 Train Loss 0.693255944601
+Epoch 109 Train Loss 0.693255877011
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 110 Train Loss 0.693255808701
+Epoch 111 Train Loss 0.693255741335
+Epoch 112 Train Loss 0.693255675325
+Epoch 113 Train Loss 0.693255608493
+Epoch 114 Train Loss 0.693255542992
+Epoch 115 Train Loss 0.693255478346
+Epoch 116 Train Loss 0.693255413269
+Epoch 117 Train Loss 0.693255348526
+Epoch 118 Train Loss 0.693255283347
+Epoch 119 Train Loss 0.693255218668
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 120 Train Loss 0.693255153294
+Epoch 121 Train Loss 0.693255088396
+Epoch 122 Train Loss 0.693255025257
+Epoch 123 Train Loss 0.693254960497
+Epoch 124 Train Loss 0.693254897704
+Epoch 125 Train Loss 0.693254833808
+Epoch 126 Train Loss 0.693254770852
+Epoch 127 Train Loss 0.693254708071
+Epoch 128 Train Loss 0.693254644635
+Epoch 129 Train Loss 0.693254582786
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 130 Train Loss 0.693254520042
+Epoch 131 Train Loss 0.693254457021
+Epoch 132 Train Loss 0.693254395271
+Epoch 133 Train Loss 0.693254333345
+Epoch 134 Train Loss 0.69325427135
+Epoch 135 Train Loss 0.693254208464
+Epoch 136 Train Loss 0.693254148358
+Epoch 137 Train Loss 0.693254086962
+Epoch 138 Train Loss 0.693254026983
+Epoch 139 Train Loss 0.693253965232
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 140 Train Loss 0.69325390636
+Epoch 141 Train Loss 0.693253845661
+Epoch 142 Train Loss 0.693253784342
+Epoch 143 Train Loss 0.693253725641
+Epoch 144 Train Loss 0.693253664929
+Epoch 145 Train Loss 0.693253604823
+Epoch 146 Train Loss 0.693253546066
+Epoch 147 Train Loss 0.693253517558
+Epoch 148 Train Loss 0.693253456646
+Epoch 149 Train Loss 0.693253397762
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 150 Train Loss 0.693253338317
+Epoch 151 Train Loss 0.69325327813
+Epoch 152 Train Loss 0.693253219645
+Epoch 153 Train Loss 0.693253161009
+Epoch 154 Train Loss 0.693253102072
+Epoch 155 Train Loss 0.693253043229
+Epoch 156 Train Loss 0.693252984903
+Epoch 157 Train Loss 0.693252927115
+Epoch 158 Train Loss 0.693252868756
+Epoch 159 Train Loss 0.693252811024
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 160 Train Loss 0.693252752316
+Epoch 161 Train Loss 0.69325269335
+Epoch 162 Train Loss 0.693252635146
+Epoch 163 Train Loss 0.693252576543
+Epoch 164 Train Loss 0.693252518743
+Epoch 165 Train Loss 0.693252461325
+Epoch 166 Train Loss 0.693252403992
+Epoch 167 Train Loss 0.693252346708
+Epoch 168 Train Loss 0.693252288492
+Epoch 169 Train Loss 0.693252230936
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 170 Train Loss 0.693252173558
+Epoch 171 Train Loss 0.693252115428
+Epoch 172 Train Loss 0.69325205678
+Epoch 173 Train Loss 0.693251999659
+Epoch 174 Train Loss 0.693251948475
+Epoch 175 Train Loss 0.693251914247
+Epoch 176 Train Loss 0.693251857562
+Epoch 177 Train Loss 0.69325179814
+Epoch 178 Train Loss 0.693251738422
+Epoch 179 Train Loss 0.693251678675
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 180 Train Loss 0.693251619025
+Epoch 181 Train Loss 0.693251559343
+Epoch 182 Train Loss 0.693251497291
+Epoch 183 Train Loss 0.693251435854
+Epoch 184 Train Loss 0.69325137309
+Epoch 185 Train Loss 0.693251310692
+Epoch 186 Train Loss 0.693251246983
+Epoch 187 Train Loss 0.693251181352
+Epoch 188 Train Loss 0.693251114882
+Epoch 189 Train Loss 0.69325111816
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 190 Train Loss 0.693250921641
+Epoch 191 Train Loss 0.693250937395
+Epoch 192 Train Loss 0.693250847483
+Epoch 193 Train Loss 0.693250773696
+Epoch 194 Train Loss 0.69325068288
+Epoch 195 Train Loss 0.693250579112
+Epoch 196 Train Loss 0.693251998491
+Epoch 197 Train Loss 0.693249965532
+Epoch 198 Train Loss 0.693250030646
+Epoch 199 Train Loss 0.693250003694
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 200 Train Loss 0.69324997675
+Epoch 201 Train Loss 0.693249949183
+Epoch 202 Train Loss 0.693249922878
+Epoch 203 Train Loss 0.693249895682
+Epoch 204 Train Loss 0.693249868062
+Epoch 205 Train Loss 0.693249841094
+Epoch 206 Train Loss 0.693249813169
+Epoch 207 Train Loss 0.693249786522
+Epoch 208 Train Loss 0.693249759407
+Epoch 209 Train Loss 0.693249733482
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 210 Train Loss 0.693249706379
+Epoch 211 Train Loss 0.693249679647
+Epoch 212 Train Loss 0.693249652687
+Epoch 213 Train Loss 0.693249626549
+Epoch 214 Train Loss 0.693249599955
+Epoch 215 Train Loss 0.693249573785
+Epoch 216 Train Loss 0.693249547033
+Epoch 217 Train Loss 0.693249520407
+Epoch 218 Train Loss 0.693249494069
+Epoch 219 Train Loss 0.693249468123
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 220 Train Loss 0.69324944177
+Epoch 221 Train Loss 0.693249415486
+Epoch 222 Train Loss 0.693249389206
+Epoch 223 Train Loss 0.693249362429
+Epoch 224 Train Loss 0.693249336535
+Epoch 225 Train Loss 0.693249310732
+Epoch 226 Train Loss 0.693249284895
+Epoch 227 Train Loss 0.6932492591
+Epoch 228 Train Loss 0.69324923295
+Epoch 229 Train Loss 0.693249206914
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 230 Train Loss 0.693249181428
+Epoch 231 Train Loss 0.693249155563
+Epoch 232 Train Loss 0.693249129181
+Epoch 233 Train Loss 0.69324910396
+Epoch 234 Train Loss 0.693249077444
+Epoch 235 Train Loss 0.693249051962
+Epoch 236 Train Loss 0.693249026956
+Epoch 237 Train Loss 0.693249000692
+Epoch 238 Train Loss 0.693248975454
+Epoch 239 Train Loss 0.693248948393
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 240 Train Loss 0.693248922988
+Epoch 241 Train Loss 0.693248897836
+Epoch 242 Train Loss 0.693248872688
+Epoch 243 Train Loss 0.693248846864
+Epoch 244 Train Loss 0.693248822888
+Epoch 245 Train Loss 0.693248796917
+Epoch 246 Train Loss 0.693248772722
+Epoch 247 Train Loss 0.693248747065
+Epoch 248 Train Loss 0.693248721383
+Epoch 249 Train Loss 0.693248696488
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 250 Train Loss 0.693248671401
+Epoch 251 Train Loss 0.693248646228
+Epoch 252 Train Loss 0.693248621467
+Epoch 253 Train Loss 0.693248596412
+Epoch 254 Train Loss 0.693248573304
+Epoch 255 Train Loss 0.693248548637
+Epoch 256 Train Loss 0.693248524629
+Epoch 257 Train Loss 0.693248499648
+Epoch 258 Train Loss 0.693248474964
+Epoch 259 Train Loss 0.693248449815
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 260 Train Loss 0.693248425494
+Epoch 261 Train Loss 0.693248401185
+Epoch 262 Train Loss 0.693248376949
+Epoch 263 Train Loss 0.693248353156
+Epoch 264 Train Loss 0.693248329344
+Epoch 265 Train Loss 0.693248304074
+Epoch 266 Train Loss 0.693248280163
+Epoch 267 Train Loss 0.693248256872
+Epoch 268 Train Loss 0.693248232542
+Epoch 269 Train Loss 0.693248208779
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 270 Train Loss 0.693248184978
+Epoch 271 Train Loss 0.69324816104
+Epoch 272 Train Loss 0.693248136975
+Epoch 273 Train Loss 0.69324811282
+Epoch 274 Train Loss 0.693248088315
+Epoch 275 Train Loss 0.693248064556
+Epoch 276 Train Loss 0.693248040556
+Epoch 277 Train Loss 0.693248017036
+Epoch 278 Train Loss 0.693247992177
+Epoch 279 Train Loss 0.693247968316
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 280 Train Loss 0.693247945122
+Epoch 281 Train Loss 0.693247922763
+Epoch 282 Train Loss 0.693247898479
+Epoch 283 Train Loss 0.693247875179
+Epoch 284 Train Loss 0.693247850801
+Epoch 285 Train Loss 0.693247826964
+Epoch 286 Train Loss 0.693247804242
+Epoch 287 Train Loss 0.693247781309
+Epoch 288 Train Loss 0.69324775814
+Epoch 289 Train Loss 0.693247735704
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 290 Train Loss 0.693247711855
+Epoch 291 Train Loss 0.693247687932
+Epoch 292 Train Loss 0.693247664714
+Epoch 293 Train Loss 0.693247640975
+Epoch 294 Train Loss 0.693247617032
+Epoch 295 Train Loss 0.693247594519
+Epoch 296 Train Loss 0.693247571911
+Epoch 297 Train Loss 0.693247548848
+Epoch 298 Train Loss 0.693247526021
+Epoch 299 Train Loss 0.693247502469
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 300 Train Loss 0.693247478717
+Epoch 301 Train Loss 0.693247456737
+Epoch 302 Train Loss 0.693247433812
+Epoch 303 Train Loss 0.693247411726
+Epoch 304 Train Loss 0.693247389266
+Epoch 305 Train Loss 0.693247365978
+Epoch 306 Train Loss 0.693247343518
+Epoch 307 Train Loss 0.693247320002
+Epoch 308 Train Loss 0.693247297806
+Epoch 309 Train Loss 0.693247274381
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 310 Train Loss 0.693247252291
+Epoch 311 Train Loss 0.693247229932
+Epoch 312 Train Loss 0.693247207166
+Epoch 313 Train Loss 0.69324718486
+Epoch 314 Train Loss 0.693247162741
+Epoch 315 Train Loss 0.693247138949
+Epoch 316 Train Loss 0.69324711681
+Epoch 317 Train Loss 0.69324709439
+Epoch 318 Train Loss 0.693247072214
+Epoch 319 Train Loss 0.693247050584
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 320 Train Loss 0.693247027745
+Epoch 321 Train Loss 0.693247005736
+Epoch 322 Train Loss 0.693246982567
+Epoch 323 Train Loss 0.693246961084
+Epoch 324 Train Loss 0.693246938582
+Epoch 325 Train Loss 0.693246916733
+Epoch 326 Train Loss 0.693246894512
+Epoch 327 Train Loss 0.693246871608
+Epoch 328 Train Loss 0.693246849847
+Epoch 329 Train Loss 0.693246827981
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 330 Train Loss 0.693246806013
+Epoch 331 Train Loss 0.693246783874
+Epoch 332 Train Loss 0.693246762041
+Epoch 333 Train Loss 0.693246740248
+Epoch 334 Train Loss 0.693246718129
+Epoch 335 Train Loss 0.693246696206
+Epoch 336 Train Loss 0.693246674157
+Epoch 337 Train Loss 0.693246651863
+Epoch 338 Train Loss 0.693246630831
+Epoch 339 Train Loss 0.693246609519
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 340 Train Loss 0.693246587498
+Epoch 341 Train Loss 0.693246565294
+Epoch 342 Train Loss 0.693246544096
+Epoch 343 Train Loss 0.693246522445
+Epoch 344 Train Loss 0.693246500693
+Epoch 345 Train Loss 0.693246479482
+Epoch 346 Train Loss 0.693246457299
+Epoch 347 Train Loss 0.693246435282
+Epoch 348 Train Loss 0.693246413754
+Epoch 349 Train Loss 0.693246392857
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 350 Train Loss 0.693246371231
+Epoch 351 Train Loss 0.693246349849
+Epoch 352 Train Loss 0.693246328972
+Epoch 353 Train Loss 0.693246307131
+Epoch 354 Train Loss 0.69324628557
+Epoch 355 Train Loss 0.693246263553
+Epoch 356 Train Loss 0.693244922347
+Epoch 357 Train Loss 0.693255282227
+Epoch 358 Train Loss 0.693266065248
+Epoch 359 Train Loss 0.693265882309
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 360 Train Loss 0.693265646207
+Epoch 361 Train Loss 0.693265401974
+Epoch 362 Train Loss 0.693265149992
+Epoch 363 Train Loss 0.693264880843
+Epoch 364 Train Loss 0.693264575287
+Epoch 365 Train Loss 0.69326419394
+Epoch 366 Train Loss 0.693263697012
+Epoch 367 Train Loss 0.693263470117
+Epoch 368 Train Loss 0.693263298803
+Epoch 369 Train Loss 0.69326311944
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 370 Train Loss 0.693262924733
+Epoch 371 Train Loss 0.693262692549
+Epoch 372 Train Loss 0.69326247624
+Epoch 373 Train Loss 0.693262203773
+Epoch 374 Train Loss 0.693261902785
+Epoch 375 Train Loss 0.693261530771
+Epoch 376 Train Loss 0.693261159417
+Epoch 377 Train Loss 0.693260558574
+Epoch 378 Train Loss 0.693259993266
+Epoch 379 Train Loss 0.693259339056
+Loading files..
+Loading files..
+Loading files..
+Loading files..
+Epoch 380 Train Loss 0.693258368044
+Epoch 381 Train Loss 0.693257347391
+Epoch 382 Train Loss 0.693256070219
+Epoch 383 Train Loss 0.693254814417
+Epoch 384 Train Loss 0.693251982545
+Epoch 385 Train Loss 0.69325009817
+Epoch 386 Train 
