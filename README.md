@@ -134,7 +134,8 @@ python se_infer.py --args....
 with a suitable set of arguements. The denoised files will be stored in the folder name which you specify as an argument in the script. As the SE model is big, it takes a couple of hours to run on a CPU and less than 5 minutes on a GPU.
 
 ## Citation
-If you use our code for research, please cite our paper:
+If you use our code for research, please cite our paper: A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES
+Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Gautham J. Mysore [arxiv](link)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
