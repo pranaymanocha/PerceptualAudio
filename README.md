@@ -135,3 +135,6 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 
 ## Citation
 If you use our code for research, please cite our paper:
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
