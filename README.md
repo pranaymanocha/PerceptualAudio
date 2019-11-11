@@ -58,7 +58,7 @@ Here is the high-level directory structure for this repository:
 
 ### Download the JND Dataset
 
-Go to [link](audio_files.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset_collection'. Here are the steps to be followed:
+Go to [link](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_files.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset_collection'. Here are the steps to be followed:
 
 ```python
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
@@ -93,6 +93,8 @@ explicitly trained on perceptual human judgments. We first investigate if simila
 2. **linear** -  training linear layers over the pretrained "off-the-shelf" model
 3. **finetune** - loading the pretrained "off-the-shelf weights" but training both the linear layer and the bulk model
 4. **scratch** - training the full model from randomly initialized weights.  
+
+
 # Section 2 - Speech Denoising
 
 As an application for our loss function, we use the trained loss function to train a Speech Enhancement Model. We use the Edinburgh Datashare publicly available dataset [here](https://datashare.is.ed.ac.uk/handle/10283/2791). We use the same dataset with any alteration except resampling the dataset at 16KHz.
@@ -133,6 +135,3 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 
 ## Citation
 If you use our code for research, please cite our paper:
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
