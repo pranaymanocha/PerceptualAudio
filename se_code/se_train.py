@@ -18,6 +18,7 @@ def argument_parser():
     parser.add_argument('--learning_rate', help='learning rate', default=1e-4,type=float)
     parser.add_argument('--feature_loss_layers', help='number of feature loss layers used', default=14,type=int)
     parser.add_argument('--kernel_size', help='kernel convolution size',default=3,type=int)
+    parser.add_argument('--type', help='pretrained/linear/finetune/scratch', default='scratch')
     
     return parser
 
@@ -109,7 +110,7 @@ print("Session initialized")
 
 # LOAD FEATURE LOSS
 if SE_LOSS_TYPE == "FL":
-    if args.pretrained=='pretrained':
+    if args.type=='pretrained':
         loss_saver = tf.train.Saver([var for var in tf.trainable_variables() if (var.name.startswith("loss_") or var.name=="weights")])
         loss_saver.restore(sess, "%s/loss_model.ckpt" % modfolder)
     else:

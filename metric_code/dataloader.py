@@ -5,7 +5,7 @@ from tqdm import tqdm
 from scipy.io import wavfile
 import os, csv
 
-def load_full_data_list(datafolder='../dataset_collection'): #check change path names
+def load_full_data_list(datafolder='../dataset_collection/'): #check change path names
 
     #sets=['train','val']
     dataset={}
@@ -15,7 +15,6 @@ def load_full_data_list(datafolder='../dataset_collection'): #check change path 
     dataset['all']['inname'] = []
     dataset['all']['outname'] = []
     dataset['all']['label']=[]
-    
     
     print("Prefetching the Combined")
     #data_path='prefetch_audio_new_mp3_new_morebandwidth'
@@ -55,7 +54,7 @@ def load_full_data_list(datafolder='../dataset_collection'): #check change path 
         dataset['all']['inname'].append("%s"%(os.path.join(list_path,split_line[0])))
         dataset['all']['outname'].append("%s"%(os.path.join(list_path,split_line[1])))
         dataset['all']['label'].append(split_line[2][:-1])
-        
+    
     return dataset
 
 

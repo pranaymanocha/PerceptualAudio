@@ -156,8 +156,12 @@ def model_run():
 
         sess.run(tf.global_variables_initializer())
         loss_saver = tf.train.Saver([var for var in tf.trainable_variables()])
-        loss_saver.restore(sess, "%s/my_test_model" % modfolder)
         
+        if args.type=='pretrained':
+            loss_saver.restore(sess, "%s/loss_model.ckpt" % modfolder)
+        else:
+            loss_saver.restore(sess, "%s/my_test_model" % modfolder)
+                
         for j in tqdm(range(len(dataset['all']['inname']))):
             wav_in,wav_out=load_full_data(dataset,'all',j)
             dist= sess.run([distance],feed_dict={input1_wav:wav_out, clean1_wav:wav_in})
