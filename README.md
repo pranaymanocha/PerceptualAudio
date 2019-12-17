@@ -39,6 +39,9 @@ Here is the high-level directory structure for this repository:
       - sample pre-trained models for easy reference
    - **sample_audio**
       - sample audio files for comparison
+   -  **create_space**
+      - code for creating perturbations - creating the space and also creating the audio files
+   
 
 # Section 1 - Train a loss function
 
