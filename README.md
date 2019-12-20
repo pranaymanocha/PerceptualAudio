@@ -39,6 +39,9 @@ Here is the high-level directory structure for this repository:
       - sample pre-trained models for easy reference
    - **sample_audio**
       - sample audio files for comparison
+   -  **create_space**
+      - code for creating perturbations - creating the space and also creating the audio files
+   
 
 # Section 1 - Train a loss function
 
@@ -137,7 +140,7 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 If you use our code for research, please cite our paper: <br/>
 A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES<br/>
 Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Gautham J. Mysore <br/>
-[Arxiv](link) 2019
+[ArXiv](link) 2019
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
