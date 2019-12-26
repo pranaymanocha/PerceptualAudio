@@ -138,9 +138,9 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 
 ## Citation
 If you use our code for research, please cite our paper: <br/>
-A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES<br/>
+**A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES<br/>**
 Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Gautham J. Mysore <br/>
-[ArXiv](link) 2019
+[arxiv](link) 2020
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
