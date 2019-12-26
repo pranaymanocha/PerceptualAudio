@@ -15,6 +15,7 @@ import tqdm
 import subprocess
 import os
 import sys
+import subprocess
 
 
 def check_valid(new_levels):
@@ -31,11 +32,13 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
     #reverb has 2
     #compression has 1
     #eq has 3
+    #misc has 1
     
-    list = np.array(['linear','reverb','compression','eq'])
+    list = np.array(['linear','reverb','compression','eq','misc'])
     random.shuffle(list)
     noise_type=np.array(["applause","blue_noise","crickets","pink_noise","violet_noise","water_drops","white_noise"])
     noise_type_compression=np.array(["mp3","mulaw"])
+    noise_type_misc=np.array(["pops","griffinlin"])
     
     reverblist=sorted(os.listdir('/n/fs/percepaudio/www/mturk_hosts/RIR_MIT/Audio'))
     if dataset=='librispeech':
@@ -48,14 +51,14 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
     for j in range(pairs):
         
         list = [1,0]
-        sampling = random.choices(list, k=4)
+        sampling = random.choices(list, k=5)
         rand_speaker=random.choice(speaker)
         rand_reverb=random.choice(reverblist)
         space=sampling.count(1)
         
         while(space<1):
             list = [1,0]
-            sampling = random.choices(list, k=4)
+            sampling = random.choices(list, k=5)
             rand_speaker=random.choice(speaker)
             rand_reverb=random.choice(reverblist)
             space=sampling.count(1)
@@ -99,14 +102,14 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
         while (count!=0):
                 
             list = [1,0]
-            sampling = random.choices(list, k=4)
+            sampling = random.choices(list, k=5)
             rand_speaker=random.choice(speaker)
             rand_reverb=random.choice(reverblist)
             space=sampling.count(1)
 
             while(space<1):
                 list = [1,0]
-                sampling = random.choices(list, k=4)
+                sampling = random.choices(list, k=5)
                 rand_speaker=random.choice(speaker)
                 rand_reverb=random.choice(reverblist)
                 space=sampling.count(1)
@@ -164,7 +167,7 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
             count=0
             
             if sampling[1]!=0 and sampling[3]!=0:
-                length=4
+                length=5
                 for k in range(length):
                     if k==0:
                         if sampling[k]==1:
@@ -190,10 +193,16 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
                         count+=1
                         save_file+='_'+str(b2[count])
                         count+=1
+                    elif k==4:
+                        if sampling[k]==1:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        else:
+                            save_file+='_'+str(0.0)
                         
                         
             elif sampling[1]!=0 and sampling[3]==0:
-                length=4
+                length=5
                 for k in range(length):
                     if k==0:
                         if sampling[k]==1:
@@ -216,9 +225,15 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
                         save_file+='_'+str(0.0)
                         save_file+='_'+str(0.0)
                         save_file+='_'+str(0.0)
+                    elif k==4:
+                        if sampling[k]==1:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        else:
+                            save_file+='_'+str(0.0)
                         
             elif sampling[1]==0 and sampling[3]!=0:
-                length=4
+                length=5
                 for k in range(length):
                     if k==0:
                         if sampling[k]==1:
@@ -244,9 +259,15 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
                         count+=1
                         save_file+='_'+str(b2[count])
                         count+=1
+                    elif k==4:
+                        if sampling[k]==1:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        else:
+                            save_file+='_'+str(0.0)
                         
             else:
-                length=4
+                length=5
                 for k in range(length):
                     if k==0:
                         if sampling[k]==1:
@@ -269,6 +290,12 @@ def ChooseRandomPoint(dataset='librispeech',pairs=50,min_difference=50):
                         save_file+='_'+str(0.0)
                         save_file+='_'+str(0.0)
                         save_file+='_'+str(0.0)
+                    elif k==4:
+                        if sampling[k]==1:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        else:
+                            save_file+='_'+str(0.0)
             
             overall_list.append(save_file+'_'+b0[b1][:-4]+'_'+str(rand_reverb))
             print(save_file+'_'+b0[b1][:-4]+'_'+str(rand_reverb))
@@ -306,6 +333,29 @@ def CreatePHPFile(normalised_list,saved_file):
     file.write(");")
     file.close()
 
+    
+def CreatePHPFile_finetune(normalised_list,saved_file):
+    
+    file = open(saved_file,'w+')
+    file.write("<?php \n")
+    file.write("$eq = array( \n")
+    a1=np.shape(normalised_list)[0]
+    
+    for i in range(np.shape(normalised_list)[0]):
+        file.write("array(")
+        split_string=normalised_list[i]
+        a='"'+split_string[0]+'"'
+        for j in range(1,len(split_string)):
+            a=a+',"'+split_string[j]+'"'
+        if i==(a1-1):
+            a=a+')'+' \n'
+        else:
+            a=a+'),'+' \n'
+        file.write(a)
+    file.write(");")
+    file.close()
+    
+    
 def snr_value(audio,audio_noise):
     audio_mag=np.sum(np.square(audio))
     audio_noise_mag=np.sum(np.square(audio_noise))
@@ -453,6 +503,47 @@ def water_drops(audio,level):
     noise = noise_level * audio_noise_shape
     conv = noise + audio
     return conv
+'''
+def pitch(level,audio,fs,args):
+    
+    starting_w=0.05
+    ending_w = 5.0
+    levels = 100.0
+    noise_level = starting_w + level *((ending_w-starting_w)/100)
+    noise_level=round(noise_level,4)
+    audio_new = librosa.effects.pitch_shift(audio, fs, n_steps=noise_level)
+    return audio_new
+'''
+def griffin_lim(level,audio,args):
+    
+    starting_w=500
+    ending_w = 1
+    levels = 100.0
+    noise_level = starting_w + level *((ending_w-starting_w)/100)
+    noise_level=round(noise_level,4)
+    S = np.abs(librosa.stft(audio))
+    y_inv = librosa.griffinlim(S,n_iter=int(noise_level))
+    return y_inv
+
+def pops(level,audio,args):
+    
+    
+    starting_w=0.0001
+    ending_w = 0.31
+    levels = 100.0
+    noise_level = starting_w + level *((ending_w-starting_w)/100)
+    noise_level=round(noise_level,4)
+    p=noise_level
+    length=p*len(audio)
+    maxi=np.max(audio)
+    mini=np.min(audio)
+
+    A=np.random.choice(int(len(audio)), int(length), replace=False)
+    A1=np.random.choice(A,int(len(A)/2),replace=False)
+    A2=np.setdiff1d(A, A1)
+    audio[A1]=maxi
+    audio[A2]=mini
+    return audio
 
 def compression_mp3(noise_l,audio,args):
     
@@ -484,7 +575,7 @@ def compression_mp3(noise_l,audio,args):
     
     return audio
 
-def audio_make(audio,list,linear_noise_type,noise_compression,noise_list,audio_ir,fs,args):
+def audio_make(audio,list,linear_noise_type,noise_compression,noise_misc,noise_list,audio_ir,fs,args):
     
     noise1=noise_list[0]
     noise2=noise_list[1]
@@ -494,6 +585,7 @@ def audio_make(audio,list,linear_noise_type,noise_compression,noise_list,audio_i
     noise5=noise_list[4]
     noise6=noise_list[5]
     noise7=noise_list[6]
+    noise8=noise_list[7]
     
     noise_final=audio
     
@@ -531,6 +623,19 @@ def audio_make(audio,list,linear_noise_type,noise_compression,noise_list,audio_i
             else:
                 eq_law=np.array([float(noise5),float(noise6),float(noise7)])
                 noise_final=EQ_create(noise_final,eq_law,fs,args)
+            
+        elif noise_list=='misc':
+            print('misc')
+            if noise8==0.0:
+                z=1
+            else:
+                if noise_misc=='pops':
+                    noise_final=pops(float(noise8),noise_final,args)
+                elif noise_misc=='griffinlin':
+                    noise_final=griffin_lim(float(noise8),noise_final,args)
+                #elif noise_misc=='pitch':
+                    #level,audio,fs,args
+                #    noise_final=pitch(float(noise8),noise_final,fs,args)
              
     return noise_final
 
@@ -551,7 +656,7 @@ def mu_law(audio,mu):
     audio_new=np.zeros(audio.shape)
     for i in range(audio.shape[0]):
         x=audio[i]
-        #print(type(x))
+       
         y=(np.sign(x)*(np.log((1+mu*np.absolute(x)))/np.log(1+mu)))
         #audio_new_test[i]=y
         audio_new[i]=np.round(((y+1)/2)*255)/255
@@ -625,7 +730,7 @@ def EQ_create(audio,a_levels,fs,args):
     F1 = F ** (expon)
     jk=a_levels
     noise_level = starting_w * (F1 ** (jk))
-    print(noise_level)
+    
     sum=0
     for i in range((noise_level.shape[0])):
         sum+=x_level[i]*noise_level[i]
@@ -639,14 +744,16 @@ def librispeech(args,path,path_new):
         csv_reader = csv.reader(csv_file,delimiter=',')
         for row in tqdm.tqdm(csv_reader):
             count+=1
-            list = np.array(['linear','reverb','compression','eq'])
+            list = np.array(['linear','reverb','compression','eq','misc'])
             noise_type=np.array(["applause","blue_noise","crickets","pink_noise","violet_noise","water_drops","white_noise"])
             random.shuffle(list)
             noise_type_compression=np.array(["mp3","mulaw"])
+            noise_type_misc=np.array(["pops","griffinlin"])
 
             noise=random.choice(noise_type)
             noise_compression=random.choice(noise_type_compression)
-
+            noise_misc=random.choice(noise_type_misc)
+            
             if count>=3 and count<=args.numberofpairs+1:
                 a=(row[0][7:-1]).split('_')
                 noise1_orig=a[0]
@@ -656,16 +763,16 @@ def librispeech(args,path,path_new):
                 noise5_orig=a[4]
                 noise6_orig=a[5]
                 noise7_orig=a[6]
+                noise8_orig=a[7]
 
-
-                speaker=a[7].split('-')[0]
-                audio_file_ir="_".join(a[10:])
+                speaker=a[8].split('-')[0]
+                audio_file_ir="_".join(a[11:])
                 audio_ir, sample_rate_ir = sf.read(os.path.join('/n/fs/percepaudio/www/mturk_hosts/RIR_MIT/Audio/',audio_file_ir))
 
                 for i in range(len(row)-1):
 
                     if i==0:
-                        a=(row[i][7:-1]).split('_')
+                        a=(row[0][7:-1]).split('_')
                         noise1=a[0]
                         noise2=a[1]
                         noise3=a[2]
@@ -673,18 +780,21 @@ def librispeech(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7].split('-')[0]
-                        filename="_".join(a[7:10])
-                        filename_full_ir="_".join(a[7:])
-
+                        speaker=a[8].split('-')[0]
+                        filename="_".join(a[8:11])
+                        filename_full_ir="_".join(a[8:])
+                        
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                        
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
 
                     elif i==len(row)-2:
 
@@ -696,25 +806,33 @@ def librispeech(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7].split('-')[0]
-                        filename="_".join(a[7:10])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8].split('-')[0]
+                        filename="_".join(a[8:11])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                        
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
 
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
+                        
+                        
                     else:
                         a=(row[i]).split('_')
                         noise1=a[0]
@@ -724,26 +842,32 @@ def librispeech(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7].split('-')[0]
-                        filename="_".join(a[7:10])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8].split('-')[0]
+                        filename="_".join(a[8:11])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
 
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
+                        
             elif count==args.numberofpairs+2:
                 a=(row[0][7:-1]).split('_')
                 noise1_orig=a[0]
@@ -753,9 +877,10 @@ def librispeech(args,path,path_new):
                 noise5_orig=a[4]
                 noise6_orig=a[5]
                 noise7_orig=a[6]
+                noise8_orig=a[7]
 
-                speaker=a[7].split('-')[0]
-                audio_file_ir="_".join(a[10:])
+                speaker=a[8].split('-')[0]
+                audio_file_ir="_".join(a[11:])
                 audio_ir, sample_rate_ir = sf.read(os.path.join('/n/fs/percepaudio/www/mturk_hosts/RIR_MIT/Audio/',audio_file_ir))
 
                 for i in (range(0,len(row))):
@@ -768,24 +893,30 @@ def librispeech(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7].split('-')[0]
-                        filename="_".join(a[7:10])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8].split('-')[0]
+                        filename="_".join(a[8:11])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                        
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
                     elif i==0:
                         a=(row[i][7:-1]).split('_')
                         noise1=a[0]
@@ -795,17 +926,19 @@ def librispeech(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7].split('-')[0]
-                        filename="_".join(a[7:10])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8].split('-')[0]
+                        filename="_".join(a[8:11])
+                        filename_full_ir="_".join(a[8:])
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
                     else:
                         a=(row[i]).split('_')
                         noise1=a[0]
@@ -815,26 +948,33 @@ def librispeech(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
-
-                        speaker=a[7].split('-')[0]
-                        filename="_".join(a[7:10])
-                        filename_full_ir="_".join(a[7:])
+                        noise8=a[7]
+                        
+                        speaker=a[8].split('-')[0]
+                        filename="_".join(a[8:11])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
                         
-#parser.add_argument('--EQ_bands', help='EQ bands (2 frequency levels)', default='5e2_1e3')
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                        
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
+                        
 def daps(args,path,path_new):
     
     count=0
@@ -842,13 +982,15 @@ def daps(args,path,path_new):
         csv_reader = csv.reader(csv_file,delimiter=',')
         for row in tqdm.tqdm(csv_reader):
             count+=1
-            list = np.array(['linear','reverb','compression','eq'])
+            list = np.array(['linear','reverb','compression','eq','misc'])
             noise_type=np.array(["applause","blue_noise","crickets","pink_noise","violet_noise","water_drops","white_noise"])
             random.shuffle(list)
             noise_type_compression=np.array(["mp3","mulaw"])
+            noise_type_misc=np.array(["pops","griffinlin"])
 
             noise=random.choice(noise_type)
             noise_compression=random.choice(noise_type_compression)
+            noise_misc=random.choice(noise_type_misc)
 
             if count>=3 and count<=args.numberofpairs+1:
                 a=(row[0][7:-1]).split('_')
@@ -859,10 +1001,10 @@ def daps(args,path,path_new):
                 noise5_orig=a[4]
                 noise6_orig=a[5]
                 noise7_orig=a[6]
+                noise8_orig=a[7]
 
-
-                speaker=a[7]
-                audio_file_ir="_".join(a[12:])
+                speaker=a[8]
+                audio_file_ir="_".join(a[13:])
                 audio_ir, sample_rate_ir = sf.read(os.path.join('/n/fs/percepaudio/www/mturk_hosts/RIR_MIT/Audio/',audio_file_ir))
 
                 for i in range(len(row)-1):
@@ -875,18 +1017,20 @@ def daps(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7]
-                        filename="_".join(a[7:12])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8]
+                        filename="_".join(a[8:13])
+                        filename_full_ir="_".join(a[8:])
                         print(filename)
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
-
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
 
                     elif i==len(row)-2:
 
@@ -898,28 +1042,36 @@ def daps(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
-
-                        speaker=a[7]
-                        filename="_".join(a[7:12])
-                        filename_full_ir="_".join(a[7:])
+                        noise8=a[7]
+                        
+                        speaker=a[8]
+                        filename="_".join(a[8:13])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
                         #randomly decide between the first two - reverb first or linear noise first
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
                         #audio_final=mu_law_selection(float(noise3),noise_before)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-                        #print(new_filename)
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                        
+                            #print(new_filename)
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-                        #print(new_filename)
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
+                            #print(new_filename)
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
+                        
                     else:
                         a=(row[i]).split('_')
                         noise1=a[0]
@@ -929,27 +1081,35 @@ def daps(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7]
-                        filename="_".join(a[7:12])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8]
+                        filename="_".join(a[8:13])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
                         #randomly decide between the first two - reverb first or linear noise first
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
                         #audio_final=mu_law_selection(float(noise3),noise_before)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-                        #print(new_filename)
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
+                            #print(new_filename)
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
+                        
+                        
             elif count==args.numberofpairs+2:
                 a=(row[0][7:-1]).split('_')
                 noise1_orig=a[0]
@@ -959,9 +1119,10 @@ def daps(args,path,path_new):
                 noise5_orig=a[4]
                 noise6_orig=a[5]
                 noise7_orig=a[6]
+                noise8_orig=a[7]
 
-                speaker=a[7]
-                audio_file_ir="_".join(a[12:])
+                speaker=a[8]
+                audio_file_ir="_".join(a[13:])
                 audio_ir, sample_rate_ir = sf.read(os.path.join('/n/fs/percepaudio/www/mturk_hosts/RIR_MIT/Audio/',audio_file_ir))
 
                 for i in (range(0,len(row))):
@@ -974,27 +1135,34 @@ def daps(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7]
-                        filename="_".join(a[7:12])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8]
+                        filename="_".join(a[8:13])
+                        filename_full_ir="_".join(a[8:])
 
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
                         #randomly decide between the first two - reverb first or linear noise first
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
                         #audio_final=mu_law_selection(float(noise3),noise_before)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
                         #print(new_filename)
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-                        #print(new_filename)
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
+                            #print(new_filename)
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
 
                     elif i==0:
                         a=(row[i][7:-1]).split('_')
@@ -1005,16 +1173,19 @@ def daps(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
 
-                        speaker=a[7]
-                        filename="_".join(a[7:12])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8]
+                        filename="_".join(a[8:13])
+                        filename_full_ir="_".join(a[8:])
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
 
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
 
                     else:
                         a=(row[i]).split('_')
@@ -1025,22 +1196,325 @@ def daps(args,path,path_new):
                         noise5=a[4]
                         noise6=a[5]
                         noise7=a[6]
+                        noise8=a[7]
                         
-                        speaker=a[7]
-                        filename="_".join(a[7:12])
-                        filename_full_ir="_".join(a[7:])
+                        speaker=a[8]
+                        filename="_".join(a[8:13])
+                        filename_full_ir="_".join(a[8:])
                         audio,sr=sf.read(os.path.join(path,speaker,filename+'.wav'))
-                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        noise_list=[noise1,noise2,noise3,noise4,noise5,noise6,noise7,noise8]
+                        audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+filename_full_ir
+                        new_filename=str(noise1)+'_'+str(noise2)+'_'+str(noise3)+'_'+str(noise4)+'_'+str(noise5)+'_'+str(noise6)+'_'+str(noise7)+'_'+str(noise8)+'_'+filename_full_ir
                         sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-                        noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig]
-                        audio_final = audio_make(audio,list,noise,noise_compression,noise_list,audio_ir,sr,args)
+                        subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                        os.remove(os.path.join(path_new,new_filename))
+                        
+                        if args.job!=1:
+                            noise_list=[noise1_orig,noise2_orig,noise3_orig,noise4_orig,noise5_orig,noise6_orig,noise7_orig,noise8_orig]
+                            audio_final = audio_make(audio,list,noise,noise_compression,noise_misc,noise_list,audio_ir,sr,args)
 
-                        new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+filename_full_ir
-                        sf.write(os.path.join(path_new,new_filename),audio_final,sr)
-                        
-                        
+                            new_filename=str(noise1_orig)+'_'+str(noise2_orig)+'_'+str(noise3_orig)+'_'+str(noise4_orig)+'_'+str(noise5_orig)+'_'+str(noise6_orig)+'_'+str(noise7_orig)+'_'+str(noise8_orig)+'_'+filename_full_ir
+                            sf.write(os.path.join(path_new,new_filename),audio_final,sr)
+                            subprocess.call(['ffmpeg', '-i', os.path.join(path_new,new_filename),'-b:a','192000',os.path.join(path_new,new_filename)[:-3]+'mp3'])
+                            os.remove(os.path.join(path_new,new_filename))
+                                     
 def function_map(args):
     print(float(args.EQ_bands.split('_')[0]))
+    
+    
+def check_valid_type(init,new_levels):
+    
+    count=0 
+    for i in range(len(new_levels)):
+        if init[i]<=new_levels[i] or new_levels[i]<0 or  new_levels[i]>100:
+            count=count+1
+    return count
+
+
+def get_points_finetune(rand_speaker,rand_reverb,b1,args):
+    
+    #linear has one param
+    #reverb has 2
+    #compression has 1
+    #eq has 3
+    
+    list = np.array(['linear','reverb','compression','eq','misc'])
+    random.shuffle(list)
+    noise_type=np.array(["applause","blue_noise","crickets","pink_noise","violet_noise","water_drops","white_noise"])
+    noise_type_compression=np.array(["mp3","mulaw"])
+    noise_type_misc=np.array(["pops","griffinlin"])
+    
+    overall_list=[]
+    b = np.linspace(0,1,64)
+    
+    for j in range(1):
+        
+        list = [1,0]
+        sampling = random.choices(list, k=5)
+        
+        space=sampling.count(1)
+
+        while(space<1):
+            list = [1,0]
+            sampling = random.choices(list, k=5)
+            
+            space=sampling.count(1)
+
+        if sampling[1]!=0 and sampling[3]!=0:
+
+            init=np.random.randint(0,101,size=space+3)
+            s = np.random.normal(0, 1, space+3)
+            decrease_max_per_hit=np.repeat(args.min_difference,space+3)
+        
+        elif sampling[1]!=0 and sampling[3]==0:
+
+            init=np.random.randint(0,101,size=space+1)
+            s = np.random.normal(0, 1, space+1)
+            decrease_max_per_hit=np.repeat(args.min_difference,space+1)
+
+        elif sampling[1]==0 and sampling[3]!=0:
+
+            init=np.random.randint(0,101,size=space+2)
+            s = np.random.normal(0, 1, space+2)
+            decrease_max_per_hit=np.repeat(args.min_difference,space+2)
+
+        else:
+
+            init=np.random.randint(0,101,size=space)
+            s = np.random.normal(0, 1, space)
+            decrease_max_per_hit=np.repeat(args.min_difference,space)
+
+        x_normalized=s/np.linalg.norm(s)
+        
+        x_normalized_equal1 = x_normalized / np.min(np.abs(x_normalized))
+
+        a = np.abs(decrease_max_per_hit / x_normalized_equal1)
+        min_steps = np.min(a)
+        c = min_steps * x_normalized_equal1
+        new_levels=init+c
+
+        count = check_valid_type(init,new_levels)
+
+        while (count!=0):
+
+            list = [1,0]
+            sampling = random.choices(list, k=5)
+            #rand_speaker=random.choice(speaker)
+            #rand_reverb=random.choice(reverblist)
+            space=sampling.count(1)
+
+            while(space<1):
+                list = [1,0]
+                sampling = random.choices(list, k=5)
+                #rand_speaker=random.choice(speaker)
+                #rand_reverb=random.choice(reverblist)
+                space=sampling.count(1)
+
+
+            if sampling[1]!=0 and sampling[3]!=0:
+
+                init=np.random.randint(0,101,size=space+3)
+                s = np.random.normal(0, 1, space+3)
+                decrease_max_per_hit=np.repeat(args.min_difference,space+3)
+
+            elif sampling[1]!=0 and sampling[3]==0:
+
+                init=np.random.randint(0,101,size=space+1)
+                s = np.random.normal(0, 1, space+1)
+                decrease_max_per_hit=np.repeat(args.min_difference,space+1)
+
+            elif sampling[1]==0 and sampling[3]!=0:
+
+                init=np.random.randint(0,101,size=space+2)
+                s = np.random.normal(0, 1, space+2)
+                decrease_max_per_hit=np.repeat(args.min_difference,space+2)
+
+            else:
+                
+                init=np.random.randint(0,101,size=space)
+                s = np.random.normal(0, 1, space)
+                decrease_max_per_hit=np.repeat(args.min_difference,space)
+
+            x_normalized=s/np.linalg.norm(s)
+
+            x_normalized_equal1 = x_normalized / np.min(np.abs(x_normalized))
+
+            a = np.abs(decrease_max_per_hit / x_normalized_equal1)
+            min_steps = np.min(a)
+            c = min_steps * x_normalized_equal1
+            new_levels=init+c
+            
+            count = check_valid_type(init,new_levels)
+        
+        pra = np.linalg.norm(c)
+        random_choice=np.sort(np.random.choice(64, 3, replace=False))[::-1]
+        
+        for i in range(len(random_choice)):
+                
+                z1=random_choice[i]
+                b2=np.round(init+b[z1]*pra*x_normalized,2)
+                save_file=''
+                count=0
+                
+                if sampling[1]!=0 and sampling[3]!=0:
+                    length=5
+                    for k in range(length):
+                        if k==0:
+                            if sampling[k]==1:
+                                save_file+=str(b2[count])
+                                count+=1
+                            else:
+                                save_file+=str(0.0)
+                        elif k==1:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        elif k==2:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+                        elif k==3:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        elif k==4:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+
+
+                elif sampling[1]!=0 and sampling[3]==0:
+                    length=5
+                    for k in range(length):
+                        if k==0:
+                            if sampling[k]==1:
+                                save_file+=str(b2[count])
+                                count+=1
+                            else:
+                                save_file+=str(0.0)
+                        elif k==1:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        elif k==2:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+                        elif k==3:
+                            save_file+='_'+str(0.0)
+                            save_file+='_'+str(0.0)
+                            save_file+='_'+str(0.0)
+                        elif k==4:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+
+                elif sampling[1]==0 and sampling[3]!=0:
+                    length=5
+                    for k in range(length):
+                        if k==0:
+                            if sampling[k]==1:
+                                save_file+=str(b2[count])
+                                count+=1
+                            else:
+                                save_file+=str(0.0)
+
+                        elif k==1:
+                            save_file+='_'+str(0.0)
+                            save_file+='_'+str(0.0)
+
+                        elif k==2:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+                        elif k==3:
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                            save_file+='_'+str(b2[count])
+                            count+=1
+                        elif k==4:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+
+                else:
+                    length=5
+                    for k in range(length):
+                        if k==0:
+                            if sampling[k]==1:
+                                save_file+=str(b2[count])
+                                count+=1
+                            else:
+                                save_file+=str(0.0)
+
+                        elif k==1:
+                            save_file+='_'+str(0.0)
+                            save_file+='_'+str(0.0)
+
+                        elif k==2:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+                        elif k==3:
+                            save_file+='_'+str(0.0)
+                            save_file+='_'+str(0.0)
+                            save_file+='_'+str(0.0)
+                        elif k==4:
+                            if sampling[k]==1:
+                                save_file+='_'+str(b2[count])
+                                count+=1
+                            else:
+                                save_file+='_'+str(0.0)
+                
+                overall_list.append(save_file+'_'+b1[:-4]+'_'+str(rand_reverb))
+        return overall_list
+        
+
+def create_triplets_finetune(args):
+    
+    reverblist=sorted(os.listdir('/n/fs/percepaudio/www/mturk_hosts/RIR_MIT/Audio'))
+    
+    if args.dataset_used=='librispeech':
+        speaker=np.array(sorted(os.listdir('/n/fs/percepaudio/librispeech/LibriSpeech/resized_files_2')))
+    elif args.dataset_used=='daps':
+        speaker=np.array(sorted(os.listdir('/n/fs/percepaudio/www/mturk_hosts/website_perturbation/snr_resize_folder/')))
+    
+    overall=[]
+    
+    for i in range(args.numberofpairs):
+        count=0
+        rand_speaker=random.choice(speaker)
+        
+        if args.dataset_used=='librispeech':
+            b0=os.listdir('/n/fs/percepaudio/librispeech/LibriSpeech/resized_files_2/'+rand_speaker)
+            
+        elif args.dataset_used=='daps':
+            b0=os.listdir('/n/fs/percepaudio/www/mturk_hosts/website_perturbation/snr_resize_folder/'+rand_speaker)
+                
+        b1=np.random.randint(0,len(b0))
+        rand_reverb=random.choice(reverblist)
+        sample1=get_points_finetune(rand_speaker,rand_reverb,b0[b1],args)
+        overall.append(sample1)
+    return overall

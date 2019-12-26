@@ -17,6 +17,8 @@ from sklearn.metrics import f1_score
 from voco_MOS import *
 from fftnet_MOS import *
 from bwe_MOS import *
+from jiaqi_MOS import *
+from scipy.io import loadmat
 
 ###########################
 import numpy as np
@@ -684,6 +686,7 @@ def load_full_data_list(A_triplet_mymetric,A_triplet_fftnet,args): #check change
                         dataset[method]['inname'].append(os.path.join(path,file_names))
         
         if args.dataset_used=='bwe':
+            
             list_methods=numpy.array(["VALID-F","Kuleshov","SPEC","OUR","VALID-R"])
             speakers=["f10","multi-m","multi-f","m10"]
             list_pa='/n/fs/percepaudio/daps/berthy/mturk-bwe/'
@@ -707,12 +710,150 @@ def load_full_data_list(A_triplet_mymetric,A_triplet_fftnet,args): #check change
                         for i in range(24):
                             file_names=speaker+"_"+method+"_"+str(i).zfill(5)+".wav"
                             dataset[method]['inname'].append(os.path.join(path,file_names))
+                            
+        if args.dataset_used=='noizeus':
+            
+            
+            a=sorted(os.listdir('/n/fs/percepaudio/noizeus/Hu_SubjListenerResults/Hu_SubjListenerResults/Dynastat/'))
+            list_noise=['babble','car','street','train']
+            list_snr=['sn5','sn10']
+            list_se=['klt','klt_jabloun','stsa','logstsa','logstsa_nest','logstsa_sap_q','weuclid','rdc','rdc_nest','mb','wavthre','scalart','tsoukalas']
 
+            path_ref='/n/fs/percepaudio/noizeus/Hu_SubjListenerResults/Hu_SubjListenerResults/Dynastat/'
+
+            count=0
+            dataset={}
+            dataset_new={}
+            
+            for i in list_noise:
+                dataset[i]={}
+                for j in list_snr:
+                    dataset[i][j]={}
+                    for k in list_se:
+                        count+=1
+                        dataset[i][j][k]={}
+                        dataset[i][j][k]={}
+                        dataset[i][j][k]['inname']=[]
+                        dataset[i][j][k]['outname']=[]
+            
+            for filename in a:
+                if filename[-4:]=='.wav':
+                    splitted_filename=filename.split('_')
+                    if len(splitted_filename)>=4:
+                        print(splitted_filename)
+                        speaker=splitted_filename[0]
+                        noise=splitted_filename[1]
+                        snr=splitted_filename[2]
+                        joined="_".join(splitted_filename[3:])
+                        method=joined[:-4]
+                        print(os.path.join(path_ref,speaker+'.wav'))
+                        print(os.path.join(path_ref,filename))
+                        dataset[noise][snr][method]['inname'].append(os.path.join(path_ref,speaker+'.wav')) #reference
+                        dataset[noise][snr][method]['outname'].append(os.path.join(path_ref,filename))      #noisy
+            
+            
+            list_methods=['all1','all2']
+            
+            dataset_new['all1']={}
+            dataset_new['all2']={}
+            dataset_new['all1']['inname']=[]
+            dataset_new['all2']['inname']=[]
+            
+            for i in list_noise:
+                for j in list_snr:
+                    for k in list_se:
+                        for l in range(len(dataset[i][j][k]['inname'])):
+                            dataset_new['all1']['inname'].append(dataset[i][j][k]['inname'][l])  #reference
+                            dataset_new['all2']['inname'].append(dataset[i][j][k]['outname'][l]) #noisy
+            dataset=dataset_new
+                        
+                        
+                        
+        if args.dataset_used=='peass':
+            
+            x = loadmat('/n/fs/percepaudio/peass/PEASS-subjdata.mat')
+            scores = x['scores']
+            soundnames=x['soundNames']
+            
+            dataset={}
+            print("Loading Files....")
+            dataset['all1']={}
+            dataset['all2']={}
+            dataset['all1']['inname']=[]
+            dataset['all2']['inname']=[]
+            
+            path='/n/fs/percepaudio/peass/'
+            
+            list_methods=['all1','all2']
+            for i in range(10):
+                count=0
+                original=i*8
+                print(os.path.join(path,soundnames[0,original][0]+'.wav'))
+                while count<=7:
+                    print(count)
+                    noisy=i*8+count
+                    dataset['all1']['inname'].append(os.path.join(path,soundnames[0,original][0]+'.wav'))
+                    dataset['all2']['inname'].append(os.path.join(os.path.join(path,soundnames[0,noisy][0]+'.wav'))
+                    count+=1
+  
+        if args.dataset_used=='voice_conversion':                                     
+                
+                print("Loading Files....")
+                dataset={}
+                dataset['all1']={}
+                dataset['all2']={}                                     
+                dataset['all1']['inname']=[]
+                dataset['all2']['inname']=[]
+                
+                list_methods=['all1','all2']
+                if args.HUB_SPO==0:                                   
+                    file = open('/n/fs/percepaudio/voice_conversion/testfile_HUB.txt', 'r')
+                elif args.HUB_SPO==1:
+                    file = open('/n/fs/percepaudio/voice_conversion/testfile_SPO.txt', 'r')
+                for line in file:
+                    split_line=line.split('\t')
+                    dataset['all1']['inname'].append(split_line[0])
+                    dataset['all2']['inname'].append(split_line[1][:-1])
+                    
+        if args.dataset_used=='jiaqi':
+            
+            
+            list_conditions=numpy.array(["mturk-1-far","mturk-1-near","mturk-2-near","mturk-ipad-office1"])
+            list_methods=numpy.array(["REVERB","WPE","BLSTM","DENOISE-WN","OUR-L1-SPEC","OUR-L1-SPEC-GAN","CLEAN"])
+
+            names = (np.array([0, 5, 6, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
+                        np.array([0, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25])
+                       )
+            dataset={}
+            print("Loading Files....")
+            for i in list_methods:
+                dataset[i]={}
+                dataset[i]['inname']=[]
+            speakers=["f10","m10"]
+
+            list_pa='/n/fs/percepaudio/daps/jaiqi/'
+            for condition in list_conditions:
+                for speaker in speakers:
+                    list_path=os.path.join(list_pa,condition,speaker)
+                    for method in list_methods:
+                        if method=='DENOISE-WN' and condition=='mturk-ipad-office1':
+                            print('SKIP')
+                        else:
+                            path=os.path.join(list_path,method)
+                            a1=sorted(os.listdir(path))
+                            for i in range(17):
+                                if speaker=='f10':
+                                    file_names=speaker+"_"+method+"_"+str(names[0][i]).zfill(5)+".wav"
+                                    dataset[method]['inname'].append(os.path.join(path,file_names))
+                                elif speaker=='m10':
+                                    file_names=speaker+"_"+method+"_"+str(names[1][i]).zfill(5)+".wav"
+                                    dataset[method]['inname'].append(os.path.join(path,file_names))
+
+        
     return dataset,list_methods
 
 
 def load_full_data(dataset,list_methods,args):
-    
     
     if args.triplet_or_MOS=='triplet':
         
@@ -729,7 +870,7 @@ def load_full_data(dataset,list_methods,args):
 
                     fs, a1  = wavfile.read(dataset[list_name[i]][id])
                     a1=resampy.resample(a1, fs, 16000)
-
+                    fs=16000
                     shape1=np.shape(a1)
 
                     a1  = np.reshape(a1, [-1, 1])
@@ -755,7 +896,7 @@ def load_full_data(dataset,list_methods,args):
                     inputData_wav = np.reshape(inputData_wav, [1, 1,shape_wav[0], shape_wav[1]])
                     inputData_wav  = np.float32(inputData_wav)
                     dataset[method]['inaudio'][id]  = inputData_wav
-
+    
     return dataset
 
 
@@ -951,6 +1092,129 @@ def get_score(args,pickle_path,A_triplet_mymetric,A_triplet_fftnet,dataset):
                 final_pesq.append(np.mean(output[i*24:i*24+24]))
             score=bwe_mos(final_pesq,dataset)
             
+        elif args.dataset_used=='jiaqi':
+            
+            pickle_in = open(pickle_path,"rb")
+            output = pickle.load(pickle_in)
+            
+            final_pesq=[]
+            for i in range(len(output)):
+                for j in range(len(output[i])):
+                    final_pesq.append(output[i][j])
+            
+            output=np.asarray(final_pesq)
+            final_pesq=[]
+            for i in range(46):
+                final_pesq.append(np.mean(output[i*17:i*17+17]))
+            score=jiaqi_mos(final_pesq,dataset)
+            
+            
+        elif args.dataset_used=='noizeus':
+            
+            pickle_in = open(pickle_path,"rb")
+            output = pickle.load(pickle_in)
+            
+            final_pesq=[]
+            for i in range(len(output)):
+                middle=[]
+                for j in range(len(output[i])):
+                    middle.append(output[i][j])
+                final_pesq.append(float(sum(middle))/len(middle))
+            
+            final_pesq=np.asarray(final_pesq)
+            score=noizeus_mos(final_pesq)
+            #OVRL,SIG,BAK
+                                                     
+        elif args.dataset_used=='peass':
+                                       
+            pickle_in = open(pickle_path,"rb")
+            output = pickle.load(pickle_in)
+                                         
+            final_pesq=[]
+            for i in range(len(output)):
+                for j in range(len(output[i])):
+                    final_pesq.append(output[i][j])
+            
+            final_pesq=np.asarray(final_pesq)
+            score=peass_mos(final_pesq)
+                                                     
+        elif args.dataset_used=='voice_conversion':
+                                     
+            pickle_in = open(pickle_path,"rb")
+            output = pickle.load(pickle_in)
+                                                     
+            final_pesq=[]
+            for i in range(len(output)):
+                for j in range(len(output[i])):
+                    final_pesq.append(output[i][j])
+                                                     
+            HUB_groups=['N19',
+             'N14',
+             'N12',
+             'N18',
+             'D05',
+             'N06',
+             'N08',
+             'N11',
+             'N10',
+             'N09',
+             'N13',
+             'N04',
+             'D01',
+             'D02',
+             'D03',
+             'N05',
+             'N07',
+             'N15',
+             'N03',
+             'N20',
+             'N16',
+             'N17',
+             'B01',
+             'D04']
+            
+            SPO_groups=['N17',
+             'B01',
+             'N03',
+             'N12',
+             'N11',
+             'N13',
+             'N06',
+             'N10',
+             'N18',
+             'N05',
+             'N16',
+             'N04']                                                                                  
+            
+            score={}                                         
+            if args.HUB_SPO==0:
+                groups=HUB_groups
+                f = open("testfile_HUB.txt", "r")                                     
+            elif args.HUB_SPO==1:
+                groups=SPO_groups
+                f = open("testfile_SPO.txt", "r")                                     
+            score={}
+            for group in groups:
+                score[group]={}
+                score[group]['score']=[]
+            count=0
+            for x in f:
+                a=x.split('\t')
+                a1=a[1][:-1]
+                a2=a1.split('/')[9].split('_')[0]
+                if a2!='B00':
+                    score[a2]['score'].append(float(final_pesq[count]))                                       
+                count+=1
+            
+            for group in groups:
+                score[group]=np.mean(score[group]['score'])
+                                                     
+            final_pesq=[]
+            sorting=sorted(score)
+            for sorteded in sorting:
+                final_pesq.append(score[sorteded]))                                   
+            score=voice_conversion_mos(final_pesq,args)                                            
+                                                     
     return score
 
 ##### MAP
@@ -1016,8 +1280,7 @@ def load_full_data_test_waveform(dataset,sets,id_value):
     
     inputData_wav  = np.reshape(inputData, [-1, 1])
     outputData_wav = np.reshape(outputData, [-1, 1])
-
-  
+    
     shape_wav = np.shape(inputData_wav)
 
     inputData_wav = np.reshape(inputData_wav, [1, 1,shape_wav[0], shape_wav[1]])
