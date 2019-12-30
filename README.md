@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 Warning: Make sure your libraries (Cuda, Cudnn,...) are compatible with the TensorFlow version you're using or the code will not run.
 
-Required software (for resampling): [SoX](http://sox.sourceforge.net/)
+Required software (for resampling): [SoX](http://sox.sourceforge.net/), [FFmpeg](https://www.ffmpeg.org/).
 
 Important note: At the moment, this algorithm requires using 32-bit floating-point audio files to perform correctly. You can use sox to convert your file.
 
