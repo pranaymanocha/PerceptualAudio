@@ -122,7 +122,11 @@ def split_trainAndtest(dataset):
     return dataset_new
     
 
+<<<<<<< HEAD
 def loadall_audio_train_waveform(dataset,resample=1):
+=======
+def loadall_audio_train_waveform(dataset,resample=0):
+>>>>>>> 4cb3e1ec6a606b437a61ca4f08a3e6f575e550ad
     
     dataset['train']['inaudio']  = [None]*len(dataset['train']['inname'])
     dataset['train']['outaudio'] = [None]*len(dataset['train']['outname'])
@@ -176,7 +180,11 @@ def loadall_audio_train_waveform(dataset,resample=1):
     return dataset
     
 
+<<<<<<< HEAD
 def loadall_audio_test_waveform(dataset,resample=1):
+=======
+def loadall_audio_test_waveform(dataset,resample=0):
+>>>>>>> 4cb3e1ec6a606b437a61ca4f08a3e6f575e550ad
 
     dataset['test']['inaudio']  = [None]*len(dataset['test']['inname'])
     dataset['test']['outaudio'] = [None]*len(dataset['test']['outname'])
