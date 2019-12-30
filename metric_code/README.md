@@ -55,13 +55,4 @@ explicitly trained on perceptual human judgments. We first investigate if simila
 1. **pretrained** - pretrained "off-the-shelf" model
 2. **linear** -  training linear layers over the pretrained "off-the-shelf" model
 3. **finetune** - loading the pretrained "off-the-shelf weights" but training both the linear layer and the bulk model
-4. **scratch** - training the full model from randomly initialized weights.  
-
-### Speech Enhancement Code
-For information on how to use the trained model to use as a loss function for speech enhancement application, see the *se_code* subfolder in this repo.
-
-### Creating Perturbation Space
-This subfolder contains how we build the perturbation space. This is an example on how to use any dataset for your dataset.
-
-### Evaluation the Trained Model - JND MOS Correlation on different datasets
-This subfolder contains how we evaluate our trained model. It contains MAP scores as well as Pearson and Spearman Correlation Scores.
+4. **scratch** - training the full model from randomly initialized weights.
