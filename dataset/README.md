@@ -1,4 +1,4 @@
-# Perceptual Metrics of Audio Dataset
+# Perceptual Metrics of Audio JND Dataset
 
 ## Citation
 
