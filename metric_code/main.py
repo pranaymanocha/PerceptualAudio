@@ -17,6 +17,12 @@ import numpy as np
 
 import argparse
 
+'''
+TODO:
+1) dummy_run dataset just to check if everything works
+
+'''
+
 def argument_parser():
     """
     Get an argument parser for a training script.
@@ -35,16 +41,18 @@ def argument_parser():
     parser.add_argument('--type', help='linear/finetune/scratch', default='scratch')
     parser.add_argument('--pretrained_model_path', help='Model Path for the pretrained model', default='../pre-model/pretrained_loss')
     parser.add_argument('--batch_size', help='batch_size', default=16,type=int)
-        
+    parser.add_argument('--dummy_test', help='batch_size', default=0,type=int)
+    parser.add_argument('--resample16k', help='resample to 16kHz', default=1,type=int)
+    
     return parser
 
 args = argument_parser().parse_args()
 
 ##Dataset Load
-dataset=load_full_data_list()
+dataset=load_full_data_list(args.dummy_test)
 dataset=split_trainAndtest(dataset)
-dataset_train=loadall_audio_train_waveform(dataset)
-dataset_test=loadall_audio_test_waveform(dataset)
+dataset_train=loadall_audio_train_waveform(dataset,args.resample16k)
+dataset_test=loadall_audio_test_waveform(dataset,args.resample16k)
 
 ##Model Params
 
@@ -63,7 +71,7 @@ LOSS_NORM = args.loss_norm # TYPE OF LAYER NORMALIZATION (NM, SBN or None)
 FILTER_SIZE = args.filter_size
 epoches=args.epochs
 
-##Model network - lin,fin and scratch
+##Model network - lin, fin and scratch
 with tf.variable_scope(tf.get_variable_scope()):
     input1_wav=tf.placeholder(tf.float32,shape=[None, None, None,1])
     
@@ -104,66 +112,8 @@ with tf.variable_scope(tf.get_variable_scope()):
             opt_task = tf.train.AdamOptimizer(learning_rate=args.learning_rate).minimize(loss_1,var_list=[var for var in tf.trainable_variables()])
         elif args.optimiser=='gd':
             opt_task = tf.train.GradientDescentOptimizer(learning_rate=args.learning_rate).minimize(loss_1,var_list=[var for var in tf.trainable_variables()])
-
-#Uncomment this code only if you want to calculate the MAP values in real time and show on tensorboard
-'''
-## function for MAP eval
-def scores_map(noise):
-    
-    filename='dataset_test_'+noise+'.txt'
-    
-    import numpy as np
-    if noise!='combined':
-            dataset_test=load_full_data_list_test('../',filename)
-    elif noise=='combined':
-        dataset_test=load_full_data_list_combined_test('../',filename)
-    
-    output=np.zeros((len(dataset_test["all"]["inname"]),1))
-                     
-    for id in tqdm(range(0, len(dataset_test["all"]["inname"]))):
-
-        wav_in,wav_out=load_full_data_test_waveform(dataset_test,'all',id)
-        a,_= sess.run([distance,dist_sigmoid],feed_dict={input1_wav:wav_in, clean1_wav:wav_out})
-        output[id]=a
-    
-    import numpy as np
-    perceptual=[]
-    for i in range(len(dataset_test['all']['label'])):
-        perceptual.append(float(dataset_test['all']['label'][i]))
-    perceptual=(np.array(perceptual))
-    perceptual=1-perceptual
-    
-    label=[]
-    for i in range(len(output)):
-        label.append(output[i][0])
-    label=np.array(label)
-
-    a=np.argsort(label) # numbered lists distance output by the audio metric
-    a1=np.sort(label)
-
-    label_sorted=label[a]
-    perceptual_sorted = perceptual[a] 
-
-    TPs = np.cumsum(perceptual_sorted)
-    FPs = np.cumsum(1-perceptual_sorted)
-    FNs = np.sum(perceptual_sorted)-TPs
-    TNs = np.sum(1-perceptual_sorted)-FPs
-
-    precs = TPs/(TPs+FPs)
-    recs = TPs/(TPs+FNs)
-    #print(recs)
-    tpr=TPs/(TPs+FNs)
-    fpr=FPs/(FPs+TNs)
-    #print(output)
-    score = voc_ap(recs,precs)
-    #print(score) # as high as possible
-    from sklearn import metrics
-    metrics_points=metrics.auc(fpr, tpr)
-    #print(metrics_points) # as high as possible than 0.50 to be meaningful
-    return [score,metrics_points]
-'''       
-          
-##Tensorboard Visualisation
+            
+## Tensorboard Visualisation
 with tf.name_scope('performance'):
     
     tf_loss_ph_train = tf.placeholder(tf.float32,shape=None,name='loss_summary_train')
@@ -237,9 +187,7 @@ with tf.Session() as sess:
             
             a=sess.run([x])
             wav_in,wav_out,labels=load_full_data_batch(dataset_train,'train',a)
-            
-            #wav_in,wav_out,labels=load_full_data_waveform(dataset_train,'train',j)
-                
+                            
             y=np.zeros((labels.shape[0],2))
             for i in range(labels.shape[0]):
                 if labels[i]=='0':
@@ -286,23 +234,6 @@ with tf.Session() as sess:
                 dist,loss_train= sess.run([distance,loss_1],feed_dict={input1_wav:wav_in, clean1_wav:wav_out,label_task:y})
                   
                 loss_epoch_test.append(loss_train)
-                
-            #[ap0,auc0]=scores_map('linear')
-            #[ap1,auc1]=scores_map('reverb')
-            #[ap2,auc2]=scores_map('mp3')
-            #[ap3,auc3]=scores_map('combined')
-
-            #summ_map_linear = sess.run(performance_summaries_map_linear, feed_dict={tf_loss_ph_map_linear:ap0})
-            #summ_writer.add_summary(summ_map_linear, epoch)
-
-            #summ_map_reverb = sess.run(performance_summaries_map_reverb, feed_dict={tf_loss_ph_map_reverb:ap1})
-            #summ_writer.add_summary(summ_map_reverb, epoch)
-
-            #summ_map_mp3 = sess.run(performance_summaries_map_mp3, feed_dict={tf_loss_ph_map_mp3:ap2})
-            #summ_writer.add_summary(summ_map_mp3, epoch)
-            
-            #summ_map_combined = sess.run(performance_summaries_map_combined, feed_dict={tf_loss_ph_map_combined:ap3})
-            #summ_writer.add_summary(summ_map_combined, epoch)
              
             summ_test = sess.run(performance_summaries_test, feed_dict={tf_loss_ph_test:sum(loss_epoch_test) / len(loss_epoch_test)})
             summ_writer.add_summary(summ_test, epoch)

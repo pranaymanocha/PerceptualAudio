@@ -285,4 +285,3 @@ def voc_ap(rec, prec, use_07_metric=True):
         # and sum (\Delta recall) * prec
         ap = np.sum((mrec[i + 1] - mrec[i]) * mpre[i + 1])
     return ap
-
