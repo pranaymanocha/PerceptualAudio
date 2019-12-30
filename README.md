@@ -1,6 +1,6 @@
 # A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES
 
-This is a Tensorflow implementation of our [paper](https://percepaudio.cs.princeton.edu/icassp2020_perceptual/).
+This is a Tensorflow implementation of our [paper](https://gfx.cs.princeton.edu/pubs/Manocha_2020_PA/index.html).
 
 Contact: [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/)
 
