@@ -154,7 +154,7 @@ def model_run():
     
     with tf.Session() as sess:
 
-        sess.run(tf.global_variables_initializer())
+        #sess.run(tf.global_variables_initializer())
         loss_saver = tf.train.Saver([var for var in tf.trainable_variables()])
         
         if args.type=='pretrained':
