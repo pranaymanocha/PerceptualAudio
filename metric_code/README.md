@@ -10,27 +10,30 @@ Here is the directory structure for this part of the codebase.
       - helper.py (misc helper functions)
       - network_model.py (NN architecture)
       - *summaries* folder to store the new trained model with tensorboard files
+      - *saved_distances* folder to store the distance evaluation after training
    - **se_code**
-   - **dataset_collection** 
+   - **dataset**
    - **pre-model**
    - **sample_audio**  
-
+   - **create_space**
+   - **eval_model**
 
 ### Download the JND Dataset
 
-Go to [link](audio_files.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset_collection'. Here are the steps to be followed:
+Go to the *dataset* subfolder in this repo to view the dataset. (Warning) The zip file is about 30GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset'. Here are the steps to be followed:
 
 ```python
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
-cd PerceptualAudio/dataset_collection
-wget audio_files.zip
-unzip audio_files.zip
+cd PerceptualAudio/dataset
+wget https://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip
+unzip audio_perception.zip
 ```
-More information on the JND framework can be found [here](some link). The text files in the subfolder dataset_collection contain information about human perceptual judgments. This sets up the dataset for training the loss function.
+
+More information on the JND framework can be found in the paper [here](some link). The text files in the subfolder *dataset* contain information about human perceptual judgments. This sets up the dataset for training the loss function.
 
 For using a custom dataset, you need to follow the following steps:
-1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset_collection* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same/different)*.
-For an example, please see any text file in *dataset_collection* subdirectory. 
+1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same(0)/different(1))*.
+For an example, please see any text file in *dataset* subdirectory. 
 2. Make changes to the dataloader.py function to reflect the new name/path of the folders/text file. 
 3. Run the main.py function (after selecting the most appropriate set of parameters). 
 
