@@ -11,12 +11,6 @@ Here is the directory structure for this part of the codebase.
       - network_model.py (NN architecture)
       - *summaries* folder to store the new trained model with tensorboard files
       - *saved_distances* folder to store the distance evaluation after training
-   - **se_code**
-   - **dataset**
-   - **pre-model**
-   - **sample_audio**  
-   - **create_space**
-   - **eval_model**
 
 ### Download the JND Dataset
 
