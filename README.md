@@ -1,6 +1,6 @@
 # A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES
 
-This is a Tensorflow implementation of our [paper](https://percepaudio.cs.princeton.edu/icassp2020_perceptual/).
+This is a Tensorflow implementation of our [paper](https://gfx.cs.princeton.edu/pubs/Manocha_2020_PA/index.html).
 
 Contact: [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/)
 
@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 Warning: Make sure your libraries (Cuda, Cudnn,...) are compatible with the TensorFlow version you're using or the code will not run.
 
-Required software (for resampling): [SoX](http://sox.sourceforge.net/)
+Required software (for resampling): [SoX](http://sox.sourceforge.net/), [FFmpeg](https://www.ffmpeg.org/).
 
 Important note: At the moment, this algorithm requires using 32-bit floating-point audio files to perform correctly. You can use sox to convert your file.
 
