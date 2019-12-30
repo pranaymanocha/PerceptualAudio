@@ -1,3 +1,0 @@
-ref.wav	2.wav	0
-ref.wav	4.wav	0
-
