@@ -20,7 +20,7 @@ Here is the directory structure for this part of the codebase.
 
 ### Download the JND Dataset
 
-Go to the *dataset* subfolder in this repo to view the dataset. (Warning) The zip file is about 30GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset'. Here are the steps to be followed:
+Go to the *dataset* subfolder in this repo to view and download the dataset. (Warning) The zip file is about 30GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset'. Here are the steps to be followed:
 
 ```python
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
@@ -56,3 +56,12 @@ explicitly trained on perceptual human judgments. We first investigate if simila
 2. **linear** -  training linear layers over the pretrained "off-the-shelf" model
 3. **finetune** - loading the pretrained "off-the-shelf weights" but training both the linear layer and the bulk model
 4. **scratch** - training the full model from randomly initialized weights.  
+
+### Speech Enhancement Code
+For information on how to use the trained model to use as a loss function for speech enhancement application, see the *se_code* subfolder in this repo.
+
+### Creating Perturbation Space
+This subfolder contains how we build the perturbation space. This is an example on how to use any dataset for your dataset.
+
+### Evaluation the Trained Model - JND MOS Correlation on different datasets
+This subfolder contains how we evaluate our trained model. It contains MAP scores as well as Pearson and Spearman Correlation Scores.
