@@ -19,9 +19,9 @@ def argument_parser():
     Get an argument parser for a training script.
     """
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--saved_name', help='name of the file saved as a pickle file',default='m_example')
-    parser.add_argument('--modfolder', help='path of the saved model to be used for inference', default='../pre-model/scratch_loss')
-    parser.add_argument('--type', help='pretrained/linear/finetune/scratch', default='scratch')
+    parser.add_argument('--saved_name', help='name of the file saved as a pickle file',default='m_example',type=str)
+    parser.add_argument('--modfolder', help='path of the saved model to be used for inference', default='../pre-model/scratch_loss',type=str)
+    parser.add_argument('--type', help='pretrained/linear/finetune/scratch', default='scratch',type=str)
     
     return parser
 
@@ -166,7 +166,7 @@ def model_run():
             wav_in,wav_out=load_full_data(dataset,'all',j)
             dist= sess.run([distance],feed_dict={input1_wav:wav_out, clean1_wav:wav_in})
             distance_overall.append(dist)
-            
+    
     return [distance_overall]
 
 distance=[]

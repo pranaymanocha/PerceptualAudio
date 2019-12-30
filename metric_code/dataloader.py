@@ -18,7 +18,7 @@ def load_full_data_list(dummy_test): #check change path names
     
     if dummy_test==0:
     
-        print("Prefetching the Combined")
+        print("Prefetching the Combined_1,2,3")
         #data_path='prefetch_audio_new_mp3_new_morebandwidth'
         list_path='../dataset'
         file = open(os.path.join(list_path,'dataset_combined.txt'), 'r')
