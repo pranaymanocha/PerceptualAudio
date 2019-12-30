@@ -32,7 +32,7 @@ Here is the high-level directory structure for this repository:
 - **PercepAudio** (main directory)
    - **metric_code** (Code for training the metric and using the metric)
    - **se_code** (train a SE model using the above-trained loss function)
-   - **dataset_collection** (JND Framework dataset and judgments)
+   - **dataset** (JND Framework dataset and judgments)
       - JND framework datasets
       - text files containing perceptual judgments
    - **pre-model**
@@ -41,7 +41,8 @@ Here is the high-level directory structure for this repository:
       - sample audio files for comparison
    -  **create_space**
       - code for creating perturbations - creating the space and also creating the audio files
-   
+   -  **eval_model**
+      - This subfolder contains how we evaluate our trained model. It contains MAP scores as well as Pearson and Spearman Correlation Scores.  
 
 # Section 1 - Train a loss function
 
@@ -53,27 +54,23 @@ Here is the high-level directory structure for this repository:
       - helper.py (misc helper functions)
       - network_model.py (NN architecture)
       - *summaries* folder to store the new trained model with tensorboard files
-   - **se_code**
-   - **dataset_collection** 
-   - **pre-model**
-   - **sample_audio**  
-
 
 ### Download the JND Dataset
 
-Go to [link](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_files.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset_collection'. Here are the steps to be followed:
+Go to [link](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder *'PerceptualAudio/dataset'*. Here are the steps to be followed:
 
 ```python
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
-cd PerceptualAudio/dataset_collection
-wget audio_files.zip
-unzip audio_files.zip
+cd PerceptualAudio/dataset
+wget audio_perception.zip
+unzip audio_perception.zip
 ```
-More information on the JND framework can be found [here](some link). The text files in the subfolder dataset_collection contain information about human perceptual judgments. This sets up the dataset for training the loss function.
+
+More information on the JND framework can be found in the paper[here](link). The text files in the subfolder *dataset* contain information about human perceptual judgments. This sets up the dataset for training the loss function.
 
 For using a custom dataset, you need to follow the following steps:
-1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset_collection* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same/different)*.
-For an example, please see any text file in *dataset_collection* subdirectory. 
+1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset_collection* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same(0)/different(1))*.
+For an example, please see any text file in *dataset* subdirectory. 
 2. Make changes to the dataloader.py function to reflect the new name/path of the folders/text file. 
 3. Run the main.py function (after selecting the most appropriate set of parameters). 
 
@@ -115,11 +112,7 @@ Direct links to download the dataset and resampling can be found [here](https://
       - data_import.py (Dataloading)
       - network_model.py (NN architecture)
       - *summaries* folder to store the new trained model with tensorboard files
-   - **metric_code** (Code for training the metric and using the metric)
-   - **dataset_collection** (JND Framework dataset and answers)
-   - **pre-model**
-   - **sample_audio**  
-
+      
 After you download the dataset, follow this directory structure to copy the audio files accordingly.
 
 ### Training the SE Model:
@@ -140,7 +133,7 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 If you use our code for research, please cite our paper: <br/>
 **A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES<br/>**
 Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Gautham J. Mysore <br/>
-[arxiv](link) 2020
+[arXiv](link) 2020
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

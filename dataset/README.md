@@ -4,7 +4,7 @@
 
 
 ## Downloading the dataset
-The link for downloading the link is [here ~20G](link). This downloads the zip file. Please unzip the zip file into the dataset_collection folder in the main directory.
+The link for downloading the link is [here ~30G](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip). This downloads the zip file. Please unzip the zip file into the *dataset* folder in the main directory.
 
 ## JND Framework
 Please look at the paper [here](link) to know more about the active learning we employ to collect JND dataset from Turk study.
