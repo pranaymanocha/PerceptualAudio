@@ -55,7 +55,6 @@ Here is the high-level directory structure for this repository:
       - network_model.py (NN architecture)
       - *summaries* folder to store the new trained model with tensorboard files
 
-
 ### Download the JND Dataset
 
 Go to [link](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder *'PerceptualAudio/dataset'*. Here are the steps to be followed:
@@ -70,8 +69,8 @@ unzip audio_perception.zip
 More information on the JND framework can be found in the paper[here](link). The text files in the subfolder *dataset* contain information about human perceptual judgments. This sets up the dataset for training the loss function.
 
 For using a custom dataset, you need to follow the following steps:
-1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset_collection* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same/different)*.
-For an example, please see any text file in *dataset_collection* subdirectory. 
+1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset_collection* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same(0)/different(1))*.
+For an example, please see any text file in *dataset* subdirectory. 
 2. Make changes to the dataloader.py function to reflect the new name/path of the folders/text file. 
 3. Run the main.py function (after selecting the most appropriate set of parameters). 
 
