@@ -15,10 +15,6 @@ Direct links to download the dataset and resampling can be found [here](https://
       - data_import.py (Dataloading)
       - network_model.py (NN architecture)
       - *summaries* folder to store the new trained model with tensorboard files
-   - **metric_code** (Code for training the metric and using the metric)
-   - **dataset_collection** (JND Framework dataset and answers)
-   - **pre-model**
-   - **sample_audio**  
 
 After you download the dataset, follow this directory structure to copy the audio files accordingly.
 
