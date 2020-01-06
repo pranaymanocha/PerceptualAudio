@@ -19,7 +19,6 @@ Go to the *dataset* subfolder in this repo to view and download the dataset. (Wa
 ```python
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
 cd PerceptualAudio/dataset
-wget https://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip
 unzip audio_perception.zip
 ```
 
