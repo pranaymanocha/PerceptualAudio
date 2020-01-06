@@ -41,8 +41,6 @@ Here is the high-level directory structure for this repository:
       - sample audio files for comparison
    -  **create_space**
       - code for creating perturbations - creating the space and also creating the audio files
-   -  **eval_model**
-      - This subfolder contains how we evaluate our trained model. It contains MAP scores as well as Pearson and Spearman Correlation Scores.  
 
 # Section 1 - Train a loss function
 
