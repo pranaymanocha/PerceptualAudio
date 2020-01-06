@@ -60,7 +60,6 @@ Go to [link](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_per
 ```python
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
 cd PerceptualAudio/dataset
-wget audio_perception.zip
 unzip audio_perception.zip
 ```
 
