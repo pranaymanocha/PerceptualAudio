@@ -18,7 +18,7 @@ import sys
 import subprocess
 import time
 
-def white_noise(audio,level):
+def white_noise(audio,level): #from levels 0 - 100 -> higher level, more noise
     
     starting_w=0.0001
     ending_w = starting_w*800.0
@@ -32,7 +32,7 @@ def white_noise(audio,level):
     conv = noise + audio
     return conv
 
-def compression_mp3(audio,level):
+def compression_mp3(audio,level): #from levels 0 - 100 -> higher level, more noise
     
     starting_w=300.0
     ending_w = 1.0
