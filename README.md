@@ -40,7 +40,7 @@ Here is the high-level directory structure for this repository:
    - **sample_audio**
       - sample audio files for comparison
    -  **create_space**
-      - code for creating perturbations - creating the space and also creating the audio files
+      - sample code for creating perturbations 
 
 # Section 1 - Train a loss function
 
