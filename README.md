@@ -133,4 +133,5 @@ Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Ga
 [arXiv](link) 2020
 
 ## License
+The source code is published under the MIT license. See LICENSE for details. In general, you can use the code for any purpose with proper attribution. If you do something interesting with the code, we'll be happy to know. Feel free to contact us.
 [MIT](https://choosealicense.com/licenses/mit/)
