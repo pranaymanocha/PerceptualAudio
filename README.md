@@ -1,6 +1,6 @@
-# A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES
+# A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES ([arXiv](link),[Sound Examples](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/))
 
-This is a Tensorflow implementation of our [paper](https://gfx.cs.princeton.edu/pubs/Manocha_2020_PA/index.html).
+This is a Tensorflow implementation of our [paper](link).
 
 Contact: [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/)
 
