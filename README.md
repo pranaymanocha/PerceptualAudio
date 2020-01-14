@@ -19,7 +19,7 @@ Important note: At the moment, this algorithm requires using 32-bit floating-poi
 
 Tested on Nvidia GeForce RTX 2080 GPU with Cuda (>=9.2) and CuDNN (>=7.3.0). CPU mode should also work with minor changes.
 
-## Basic Usage as a distance metric
+## Basic usage as a distance metric
 Example scripts to take the distance between 2 specific audio files and gives the perceptual distance between the files as measured by our models: 
 ```python
 cd metric_code
