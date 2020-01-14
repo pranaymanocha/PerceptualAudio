@@ -1,5 +1,5 @@
 ## Basic usage as a distance metric
-Example scripts to take the distance between 2 specific audio files and gives the perceptual distance between the files as measured by our models: 
+Example scripts to take 2 specific audio files as input and give the perceptual distance between the files as measured by our models: 
 ```python
 cd metric_code
 python metric_use_simple.py --e0 file1.wav --e1 file2.wav
