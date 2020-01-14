@@ -7,7 +7,7 @@
 The link for downloading the link is [here ~30G](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip). This downloads the zip file. Please unzip the zip file into the *dataset* folder in the main directory.
 
 ## JND Framework
-Please look at the paper [here](link) to know more about the active learning we employ to collect JND dataset from Turk study.
+Please look at the paper [here](http://arxiv.org/abs/2001.04460) to know more about the active learning we employ to collect JND dataset from Turk study.
 
 ## Instructions to use
 JND Audio pairwise dataset. The database was designed to train an audio loss metric that takes in two audio files and tells if the two files are the same or different.
