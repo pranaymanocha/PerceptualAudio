@@ -2,7 +2,7 @@
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
 [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Richard Zhang](http://richzhang.github.io/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html)  
-In ArXiv, 2020.
+In [ArXiv](https://arxiv.org/abs/2001.04460), 2020.
 
 <img src='https://richzhang.github.io/index_files/audio_teaser.jpg' width=500>
 
@@ -123,10 +123,8 @@ python se_infer.py --args....
 with a suitable set of arguements. The denoised files will be stored in the folder name which you specify as an argument in the script. As the SE model is big, it takes a couple of hours to run on a CPU and less than 5 minutes on a GPU.
 
 ### Citation
-If you use our code for research, please cite our paper: <br/>
-**A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences<br/>**
-Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Gautham J. Mysore <br/>
-[arXiv](https://arxiv.org/abs/2001.04460) 2020
+
+If you use our code for research, please use the following to cite.
 
 ```
 @inproceedings{manocha2018perceptual,
