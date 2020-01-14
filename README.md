@@ -19,6 +19,14 @@ Important note: At the moment, this algorithm requires using 32-bit floating-poi
 
 Tested on Nvidia GeForce RTX 2080 GPU with Cuda (>=9.2) and CuDNN (>=7.3.0). CPU mode should also work with minor changes.
 
+## Basic Usage as a distance metric
+Example scripts to take the distance between 2 specific audio files and gives the perceptual distance between the files as measured by our models: 
+```python
+cd metric_code
+python metric_use_simple.py --e0 file1.wav --e1 file2.wav
+```
+For loading large number of files: look at ***metric_use.py*** for more information on how to use the trained model to infer distances between audio files for large number of files at one go. In short, you need to change the dataloader function (namely function load_full_data_list()). You also need to provide the path of the trained model as an input argument.
+
 ## Navigating this repository
 
 There are two main sections:
@@ -63,7 +71,7 @@ cd PerceptualAudio/dataset
 unzip audio_perception.zip
 ```
 
-More information on the JND framework can be found in the paper [here](https://arxiv.org/abs/2001.04460). The text files in the subfolder *dataset* contain information about human perceptual judgments. This sets up the dataset for training the loss function.
+More information on the JND framework can be found in the paper[here](link). The text files in the subfolder *dataset* contain information about human perceptual judgments. This sets up the dataset for training the loss function.
 
 For using a custom dataset, you need to follow the following steps:
 1. Follow a similar framework to obtain human perceptual judgments and store them in the *dataset* subdirectory. Also create a text file containing the results of all human perceptual judgments using a convention *reference_audio_path \t noisy_audio_path \t human judgment(same(0)/different(1))*.
