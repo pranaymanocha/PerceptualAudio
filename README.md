@@ -8,7 +8,7 @@ Contact: [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/)
 
 Required python libraries: Tensorflow with GPU support (>=1.13) + Scipy (>=1.1) + Numpy (>=1.14) + Tqdm (>=4.0.0). To install in your python distribution, run
 
-```bash
+```
 pip install -r requirements.txt
 ```
 Warning: Make sure your libraries (Cuda, Cudnn,...) are compatible with the TensorFlow version you're using or the code will not run.
@@ -21,7 +21,7 @@ Tested on Nvidia GeForce RTX 2080 GPU with Cuda (>=9.2) and CuDNN (>=7.3.0). CPU
 
 ## Basic usage as a distance metric
 Example scripts to take 2 specific audio files as input and give the perceptual distance between the files as measured by our models: 
-```python
+```
 cd metric_code
 python metric_use_simple.py --e0 ../sample_audio/ref.wav --e1 ../sample_audio/2.wav
 ```
@@ -65,7 +65,7 @@ Here is the high-level directory structure for this repository:
 
 Go to [link](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/audio_perception.zip) to download the dataset. (Warning) The zip file is about 23GB. After downloading the dataset, unzip the dataset into the project folder *'PerceptualAudio/dataset'*. Here are the steps to be followed:
 
-```python
+```
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
 cd PerceptualAudio/dataset
 unzip audio_perception.zip
@@ -122,14 +122,14 @@ After you download the dataset, follow this directory structure to copy the audi
 
 ### Training the SE Model:
 We make use of our metric as a loss function for training an SE model. After you have downloaded the noisy dataset above (and kept the files at the correct locations), you can start training by running the command:
-```python
+```
 python se_train.py --args.....
 ```
 The trained model is stored under the *summaries* folder under the folder name which you specify as an argument. The model is saved as *se_model_'+str(seconds)+'.ckpt'* where seconds is the time in seconds since epoch so that the training can be easily monitered.
 
 ### Inferring the SE Model
 After you train a SE model, you can use the same trained model to denoise audio files. Simply run 
-```python
+```
 python se_infer.py --args....
 ```
 with a suitable set of arguements. The denoised files will be stored in the folder name which you specify as an argument in the script. As the SE model is big, it takes a couple of hours to run on a CPU and less than 5 minutes on a GPU.
