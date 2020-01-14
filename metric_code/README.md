@@ -1,3 +1,11 @@
+## Basic usage as a distance metric
+Example scripts to take the distance between 2 specific audio files and gives the perceptual distance between the files as measured by our models: 
+```python
+cd metric_code
+python metric_use_simple.py --e0 file1.wav --e1 file2.wav
+```
+For loading large number of files: look at ***metric_use.py*** for more information on how to use the trained model to infer distances between audio files for large number of files at one go. In short, you need to change the dataloader function (namely function load_full_data_list()). You also need to provide the path of the trained model as an input argument.
+
 # Train a loss function
 
 Here is the directory structure for this part of the codebase.
