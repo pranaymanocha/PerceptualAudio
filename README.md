@@ -1,6 +1,6 @@
-# A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES ([arXiv](link),[Sound Examples](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/))
+# A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences ([arXiv](https://arxiv.org/abs/2001.04460),[Sound Examples](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/))
 
-This is a Tensorflow implementation of our [paper](link).
+This is a Tensorflow implementation of our [paper](https://arxiv.org/abs/2001.04460).
 
 Contact: [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/)
 
@@ -130,7 +130,7 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 If you use our code for research, please cite our paper: <br/>
 **A DIFFERENTIABLE PERCEPTUAL AUDIO METRIC LEARNED FROM JUST NOTICEABLE DIFFERENCES<br/>**
 Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Gautham J. Mysore <br/>
-[arXiv](link) 2020
+[arXiv](https://arxiv.org/abs/2001.04460) 2020
 
 ## License
 The source code is published under the MIT license. See LICENSE for details. In general, you can use the code for any purpose with proper attribution. If you do something interesting with the code, we'll be happy to know. Feel free to contact us.
