@@ -26,6 +26,7 @@ cd metric_code
 python metric_use_simple.py --e0 ../sample_audio/ref.wav --e1 ../sample_audio/2.wav
 ```
 Just for a sanity check, running the above command returns **distance=0.1928**.
+
 For loading large number of files: look at ***metric_use.py*** for more information on how to use the trained model to infer distances between audio files for large number of files at one go. In short, you need to change the dataloader function (namely function load_full_data_list()). You also need to provide the path of the trained model as an input argument.
 
 ## Navigating this repository
@@ -142,5 +143,5 @@ Pranay Manocha, Adam Finkelstein, Zeyu Jin, Nicholas J. Bryan, Richard Zhang, Ga
 [arXiv](https://arxiv.org/abs/2001.04460) 2020
 
 ## License
-The source code is published under the MIT license. See LICENSE for details. In general, you can use the code for any purpose with proper attribution. If you do something interesting with the code, we'll be happy to know. Feel free to contact us.
+The source code is published under the MIT license. See LICENSE for details. In general, you can use the code for any purpose with proper attribution. If you do something interesting with the code, we'll be happy to know. Feel free to contact us.<br/>
 [MIT](https://choosealicense.com/licenses/mit/)
