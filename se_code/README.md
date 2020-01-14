@@ -20,14 +20,14 @@ After you download the dataset, follow this directory structure to copy the audi
 
 ### Training the SE Model:
 We make use of our metric as a loss function for training an SE model. After you have downloaded the noisy dataset above (and kept the files at the correct locations), you can start training by running the command:
-```python
+```
 python se_train.py --args.....
 ```
 The trained model is stored under the *summaries* folder under the folder name which you specify as an argument. The model is saved as *se_model_'+str(seconds)+'.ckpt'* where seconds is the time in seconds since epoch so that the training can be easily monitered.
 
 ### Inferring the SE Model
 After you train a SE model, you can use the same trained model to denoise audio files. Simply run 
-```python
+```
 python se_infer.py --args....
 ```
 with a suitable set of arguements. The denoised files will be stored in the folder name which you specify as an argument in the script. As the SE model is big, it takes a couple of hours to run on a CPU and less than 5 minutes on a GPU.
