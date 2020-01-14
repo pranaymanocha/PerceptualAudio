@@ -1,9 +1,11 @@
 ## Basic usage as a distance metric
 Example scripts to take 2 specific audio files as input and give the perceptual distance between the files as measured by our models: 
-```python
+```
 cd metric_code
 python metric_use_simple.py --e0 file1.wav --e1 file2.wav
 ```
+Just for a sanity check, running the above command returns distance=0.1928.
+
 For loading large number of files: look at ***metric_use.py*** for more information on how to use the trained model to infer distances between audio files for large number of files at one go. In short, you need to change the dataloader function (namely function load_full_data_list()). You also need to provide the path of the trained model as an input argument.
 
 # Train a loss function
@@ -24,7 +26,7 @@ Here is the directory structure for this part of the codebase.
 
 Go to the *dataset* subfolder in this repo to view and download the dataset. (Warning) The zip file is about 30GB. After downloading the dataset, unzip the dataset into the project folder 'PerceptualAudio/dataset'. Here are the steps to be followed:
 
-```python
+```
 git clone https://github.com/pranaymanocha/PerceptualAudio.git
 cd PerceptualAudio/dataset
 unzip audio_perception.zip
