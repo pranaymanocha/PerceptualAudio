@@ -127,11 +127,14 @@ with a suitable set of arguements. The denoised files will be stored in the fold
 If you use our code for research, please use the following to cite.
 
 ```
-@inproceedings{manocha2018perceptual,
-  title={A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences},
-  author={Manocha, Pranay and Finkelstein, Adam and Jin, Zeyu and Bryan, Nicholas J. and Zhang, Richard and Mysore, Gautham J.},
-  booktitle={arXiv},
-  year={2020}
+@inproceedings{Manocha:2020:ADP,
+   author = "Pranay Manocha and Adam Finkelstein and Zeyu Jin and Nicholas J. Bryan
+      and Richard Zhang and Gautham J. Mysore",
+   title = "A Differentiable Perceptual Audio Metric Learned from Just Noticeable
+      Differences",
+   booktitle = "arXiv",
+   year = "2020",
+   month = jan
 }
 ```
 
