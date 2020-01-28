@@ -71,7 +71,7 @@ six==1.12.0
 SoundFile==0.10.2
 subprocess32==3.5.4
 tensorboard==1.13.1
-tensorflow==1.13.1
+tensorflow==1.15.2
 tensorflow-estimator==1.13.0
 termcolor==1.1.0
 tornado==5.1.1
