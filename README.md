@@ -10,7 +10,7 @@ This is a Tensorflow implementation of our audio perceptual metric. It contains 
 
 ## (0) Setup and basic usage
 
-Required python libraries: Tensorflow with GPU support (>=1.13) + Scipy (>=1.1) + Numpy (>=1.14) + Tqdm (>=4.0.0). To install in your python distribution, run ```pip install -r requirements.txt```.
+Required python libraries: Tensorflow with GPU support (>=1.14) + Scipy (>=1.1) + Numpy (>=1.14) + Tqdm (>=4.0.0). To install in your python distribution, run ```pip install -r requirements.txt```.
 
 Additional notes:
 - Warning: Make sure your libraries (Cuda, Cudnn,...) are compatible with the TensorFlow version you're using or the code will not run.
