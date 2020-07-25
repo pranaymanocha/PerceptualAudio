@@ -128,13 +128,13 @@ If you use our code for research, please use the following to cite.
 
 ```
 @inproceedings{Manocha:2020:ADP,
-   author = "Pranay Manocha and Adam Finkelstein and Zeyu Jin and Nicholas J. Bryan
-      and Richard Zhang and Gautham J. Mysore",
+   author = "Pranay Manocha and Adam Finkelstein and Richard Zhang and Nicholas J.
+      Bryan and Gautham J. Mysore and Zeyu Jin",
    title = "A Differentiable Perceptual Audio Metric Learned from Just Noticeable
       Differences",
-   booktitle = "arXiv",
+   booktitle = "Interspeech",
    year = "2020",
-   month = jan
+   month = oct
 }
 ```
 
