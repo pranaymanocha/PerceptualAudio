@@ -1,7 +1,7 @@
 # Learned Perceptual Audio Metric [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/)
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
-[Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Richard Zhang](http://richzhang.github.io/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html)  
+[Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Richard Zhang](http://richzhang.github.io/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/)
 Accepted at [Interspeech2020](https://arxiv.org/abs/2001.04460)
 
 <img src='https://richzhang.github.io/index_files/audio_teaser.jpg' width=500>
