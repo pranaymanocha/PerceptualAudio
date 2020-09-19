@@ -1,4 +1,4 @@
-# Learned Perceptual Audio Metric [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/)
+# Learned Perceptual Audio Metric (LPAM) [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/)
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
 [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Richard Zhang](http://richzhang.github.io/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/)  
@@ -6,7 +6,7 @@ Accepted at [Interspeech2020](https://arxiv.org/abs/2001.04460)
 
 <img src='https://richzhang.github.io/index_files/audio_teaser.jpg' width=500>
 
-This is a Tensorflow implementation of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric, (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
+This is a Tensorflow implementation of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (LPAM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
 ## (0) Setup and basic usage
 
