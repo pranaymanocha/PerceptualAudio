@@ -1,4 +1,4 @@
-# Learned Perceptual Audio Metric (LPAM) [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://gfx.cs.princeton.edu/pubs/Manocha_2020_ADP/)
+# Learned Perceptual Audio Similarity Metric (PASM) [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://pixl.cs.princeton.edu/pubs/Manocha_2020_ADP/)
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
 [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Richard Zhang](http://richzhang.github.io/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/)  
@@ -10,7 +10,7 @@ This is a Tensorflow implementation of our audio perceptual metric. It contains 
 
 ## (0) Setup and basic usage
 
-Required python libraries: Tensorflow with GPU support (>=1.14) + Scipy (>=1.1) + Numpy (>=1.14) + Tqdm (>=4.0.0). To install in your python distribution, run ```pip install -r requirements.txt```.
+Required python libraries: Tensorflow with GPU support (>=1.14)(uses tensorflow's slim library so doesnt support tf2.0) + Scipy (>=1.1) + Numpy (>=1.14) + Tqdm (>=4.0.0). To install in your python distribution, run ```pip install -r requirements.txt```.
 
 Additional notes:
 - Warning: Make sure your libraries (Cuda, Cudnn,...) are compatible with the TensorFlow version you're using or the code will not run.
