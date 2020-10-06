@@ -26,6 +26,7 @@ This version currently supports **evaluating** the trained metric, as well as us
 ```bash
 pip install pasm
 ```
+Please look at example_pip.py to see an ```example_pip.py``` on how to use the function. 
 
 ### Cloning from the repository
 Follow the instructions below to: 1) Evaluate the metric on a few examples, 2) Train a metric on our dataset, 3) Use the metric to optimize a downstream task and 4) Use our pretrained speech enhancement model (trained using our loss function metric).
