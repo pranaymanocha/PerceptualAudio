@@ -8,6 +8,12 @@ Accepted at [Interspeech2020](https://arxiv.org/abs/2001.04460)
 
 This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (PASM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
+## Quick Start
+
+```bash
+pip install pasm
+```
+
 ## (0) Setup and basic usage
 
 Required python libraries: Tensorflow with GPU support (>=1.14)(uses tensorflow's slim library so doesnt support tf2.0) + Scipy (>=1.1) + Numpy (>=1.14) + Tqdm (>=4.0.0). To install in your python distribution, run ```pip install -r requirements.txt```.
@@ -21,7 +27,7 @@ Additional notes:
 
 ## There are two ways to run the code:
 
-### Using pip (Quick Start)
+### Using pip
 This version currently supports **evaluating** the trained metric, as well as using the metric for **backpropogation(as a loss function)**. This version currently does not support a simple interface to **train** the metric. For training, please clone this repo and follow the instructions below.
 ```bash
 pip install pasm
