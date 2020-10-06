@@ -6,7 +6,13 @@ Accepted at [Interspeech2020](https://arxiv.org/abs/2001.04460)
 
 <img src='https://richzhang.github.io/index_files/audio_teaser.jpg' width=500>
 
-This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (LPAM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
+This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (PASM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
+
+## Quick Start
+
+```bash
+pip install pasm
+```
 
 ## (0) Setup and basic usage
 
@@ -21,11 +27,12 @@ Additional notes:
 
 ## There are two ways to run the code:
 
-### Using pip (Quick Start)
+### Using pip
 This version currently supports **evaluating** the trained metric, as well as using the metric for **backpropogation(as a loss function)**. This version currently does not support a simple interface to **train** the metric. For training, please clone this repo and follow the instructions below.
 ```bash
 pip install pasm
 ```
+Please look at  ```example_pip.py``` as an example on how to use the function. 
 
 ### Cloning from the repository
 Follow the instructions below to: 1) Evaluate the metric on a few examples, 2) Train a metric on our dataset, 3) Use the metric to optimize a downstream task and 4) Use our pretrained speech enhancement model (trained using our loss function metric).
