@@ -18,6 +18,19 @@ Additional notes:
 - Important note: At the moment, this algorithm requires using 32-bit floating-point audio files to perform correctly. You can use sox to convert your file.
 - Tested on Nvidia GeForce RTX 2080 GPU with Cuda (>=9.2) and CuDNN (>=7.3.0). CPU mode should also work with minor changes.
 
+
+## There are two ways to run the code:
+
+### Using pip (Quick Start)
+This version currently supports **evaluating** the trained metric, as well as using the metric for **backpropogation(as a loss function)**. This version currently does not support a simple interface to **train** the metric. For training, please clone this repo and follow the instructions below.
+```bash
+pip install pasm
+```
+
+### Cloning from the repository
+Follow the instructions below to: 1) Evaluate the metric on a few examples, 2) Train a metric on our dataset, 3) Use the metric to optimize a downstream task and 4) Use our pretrained speech enhancement model (trained using our loss function metric).
+
+
 ### Minimal basic usage as a distance metric
 
 Running the command below takes two audio files as input and gives the perceptual distance between the files. It should return **distance = 0.1928**. 
