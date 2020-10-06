@@ -9,9 +9,19 @@ Accepted at [Interspeech2020](https://arxiv.org/abs/2001.04460)
 This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (PASM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
 ## Quick Start
-
+Installing the metric (PASM - perceptual audio similarity metric)
 ```bash
 pip install pasm
+```
+
+Using the metric is as simple as: 
+```bash
+import pasm
+loss_fn = pasm.PASM()
+wav_ref = pasm.load_audio('sample_audio/ref.wav')
+wav_out = pasm.load_audio('sample_audio/2.wav')
+
+dist = loss_fn.forward(wav_ref,wav_out)
 ```
 
 ## (0) Setup and basic usage
