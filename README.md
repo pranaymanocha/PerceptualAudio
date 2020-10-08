@@ -2,16 +2,26 @@
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
 [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Richard Zhang](http://richzhang.github.io/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/)  
-Accepted at [Interspeech2020](https://arxiv.org/abs/2001.04460)
+Accepted at [Interspeech 2020](https://arxiv.org/abs/2001.04460)
 
 <img src='https://richzhang.github.io/index_files/audio_teaser.jpg' width=500>
 
 This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (PASM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
 ## Quick Start
-
+Installing the metric (PASM - perceptual audio similarity metric)
 ```bash
 pip install pasm
+```
+
+Using the metric is as simple as: 
+```bash
+import pasm
+loss_fn = pasm.PASM()
+wav_ref = pasm.load_audio('sample_audio/ref.wav')
+wav_out = pasm.load_audio('sample_audio/2.wav')
+
+dist = loss_fn.forward(wav_ref,wav_out)
 ```
 
 ## (0) Setup and basic usage
