@@ -5,6 +5,8 @@ from tqdm import tqdm
 from scipy.io import wavfile
 import os, csv
 
+import resampy
+
 def load_full_data_list(dummy_test): #check change path names
 
     #sets=['train','val']
