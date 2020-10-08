@@ -17,6 +17,14 @@ import os
 import sys
 import subprocess
 import time
+import pyloudnorm as pyln
+
+def audio_volume_normalize(data,rate,loudness_level=-16):
+    
+    meter = pyln.Meter(rate)
+    loudness = meter.integrated_loudness(data) # measure loudness
+    loudness_normalized_audio = pyln.normalize.loudness(data, loudness, loudness_level)
+    return loudness_normalized_audio
 
 ## White noise
 def white_noise(audio,level): #from levels 0 - 100 -> higher level, more noise
@@ -70,6 +78,26 @@ def compression_mp3(audio,level): #from levels 0 - 100 -> higher level, more noi
     
     return audio
 
+def mu_law_selection(noise_l,audio):
+    starting_w=1.0
+    ending_w = 60.0
+    levels = 100.0
+    F = (ending_w / starting_w)
+    expon = 1 / (levels)
+    F1 = F ** (expon)
+    jk=noise_l
+    noise_level = starting_w * (F1 ** (jk))
+    audio_final=mu_law(audio,pow(2,noise_level)-1)
+    return audio_final
+
+def mu_law(audio,mu):
+    audio_new=np.zeros(audio.shape)
+    for i in range(audio.shape[0]):
+        x=audio[i]
+        y=(np.sign(x)*(np.log((1+mu*np.absolute(x)))/np.log(1+mu)))
+        audio_new[i]=np.round(((y+1)/2)*255)/255
+    return audio_new
+
 ## Pops noise
 def pops(level,audio,args=1):
     
@@ -99,6 +127,38 @@ def pops(level,audio,args=1):
     audio_return[A2]=mini
     
     return audio_return
+
+def spec_sub(audio,fs,level):
+    
+    starting_w = 0.0001
+    ending_w = 0.04
+    levels = 100.0
+    
+    noise_level = starting_w + level *((ending_w-starting_w)/levels)
+    noise_level=round(noise_level,4)
+    
+    c = noise_level
+    noise_spec = 1
+    
+    f, t, sp = scipy.signal.stft(audio, fs=fs)
+    A = (abs(sp) - c * noise_spec)
+    A[A < 0] = 0
+    
+    sp1 = A * np.exp(1j * numpy.angle(sp))
+    y , xrec = signal.istft(sp1, fs=fs)
+        
+    return xrec
+
+def griffin_lim(level,audio,args=1):
+    
+    starting_w=80.0
+    ending_w = 1.0
+    levels = 100.0
+    noise_level = starting_w + level *((ending_w-starting_w)/100)
+    noise_level=round(noise_level,4)
+    S = np.abs(librosa.stft(audio))
+    y_inv = librosa.griffinlim(S,n_iter=int(noise_level))
+    return y_inv
 
 
 ## Equalization Noise
