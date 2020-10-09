@@ -1,10 +1,9 @@
 import os
 import numpy as np
-
 from tqdm import tqdm
 from scipy.io import wavfile
 import os, csv
-
+import random
 import resampy
 
 def load_full_data_list(dummy_test): #check change path names
@@ -235,11 +234,32 @@ def loadall_audio_test_waveform(dataset,resample=0):
 
 def load_full_data_batch(dataset,sets,id_value):
     
+    highest = []
+    #calculate the longest file in the batch
+    for i in range(len(id_value[0])):
+        id = id_value[0][i][0]
+        inputData_wav=dataset[sets]['inaudio'][id]
+        inputData_wav  = np.reshape(inputData_wav, [-1, 1])
+        shape=np.shape(inputData_wav)[0]
+        highest.append(shape)
+    
+    maximum=max(highest)
+    
     for i in range(len(id_value[0])):
         
         id = id_value[0][i][0]
         inputData_wav=dataset[sets]['inaudio'][id]
+        inputData_wav  = np.reshape(inputData_wav, [-1])
+        shape=np.shape(inputData_wav)[0]
+        inputData_wav=append_ends(inputData_wav,maximum-shape)
+        inputData_wav  = np.reshape(inputData_wav, [1,1,maximum,1])
+        
         outputData_wav=dataset[sets]['outaudio'][id]
+        outputData_wav  = np.reshape(outputData_wav, [-1])
+        shape=np.shape(outputData_wav)[0]
+        outputData_wav=append_ends(outputData_wav,maximum-shape)
+        outputData_wav  = np.reshape(outputData_wav, [1,1,maximum,1])
+        
         label = np.reshape(np.asarray(dataset[sets]['label'][id]),[-1,1])
         
         if i==0:
@@ -250,5 +270,17 @@ def load_full_data_batch(dataset,sets,id_value):
             waveform_in=np.concatenate((waveform_in,inputData_wav),axis=0)
             waveform_out=np.concatenate((waveform_out,outputData_wav),axis=0)
             labels=np.concatenate((labels,label),axis=0)
-    
+            
     return [waveform_in,waveform_out,labels]
+
+
+def append_ends(audio,amount):
+    
+    a=(np.zeros(amount))
+    a1=random.randint(0,1)
+    if a1==0:
+        inputData=np.append(a,audio,axis=0)
+    else:
+        inputData=np.append(audio,a,axis=0)
+    
+    return inputData
