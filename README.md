@@ -1,4 +1,4 @@
-# Learned Perceptual Audio Similarity Metric (PASM) [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://pixl.cs.princeton.edu/pubs/Manocha_2020_ADP/)
+# Deep Perceptual Audio Metric (DPAM) [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://pixl.cs.princeton.edu/pubs/Manocha_2020_ADP/)
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
 [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Richard Zhang](http://richzhang.github.io/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/)  
@@ -6,20 +6,20 @@ Accepted at [Interspeech 2020](https://arxiv.org/abs/2001.04460)
 
 <img src='https://richzhang.github.io/index_files/audio_teaser.jpg' width=500>
 
-This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (PASM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
+This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (DPAM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
 ## Quick Start
-Installing the metric (PASM - perceptual audio similarity metric)
+Installing the metric (DPAM - perceptual audio similarity metric)
 ```bash
-pip install pasm
+pip install dpam
 ```
 
 Using the metric is as simple as: 
 ```bash
-import pasm
-loss_fn = pasm.PASM()
-wav_ref = pasm.load_audio('sample_audio/ref.wav')
-wav_out = pasm.load_audio('sample_audio/2.wav')
+import dpam
+loss_fn = dpam.DPAM()
+wav_ref = dpam.load_audio('sample_audio/ref.wav')
+wav_out = dpam.load_audio('sample_audio/2.wav')
 
 dist = loss_fn.forward(wav_ref,wav_out)
 ```
@@ -40,7 +40,7 @@ Additional notes:
 ### Using pip
 This version currently supports **evaluating** the trained metric, as well as using the metric for **backpropogation(as a loss function)**. This version currently does not support a simple interface to **train** the metric. For training, please clone this repo and follow the instructions below.
 ```bash
-pip install pasm
+pip install dpam
 ```
 Please look at  ```example_pip.py``` as an example on how to use the function. 
 
