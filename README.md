@@ -11,7 +11,7 @@ This is a Tensorflow implementation (a pytorch implementation is [here](https://
 ## Things to note:
 1) At the moment, this algorithm requires using 16-bit PCM audio files to perform correctly. You can use sox to convert your file.
 2) The current pretrained models support sr=22050Hz. Please make sure to resample your files first before using the metric.
-For ease, you can load your audio clip using librosa.load(filename,sr=22050) and then rescale to [-32768 to 32768] using np.round(audio_file.astype(np.float)*32768). See 'metric_code/metric_use_simple.py' for an example.
+For ease, you can load your audio clip using librosa.load(filename,sr=22050) and then rescale to [-32768 to 32768] using np.round(audio_file.astype(np.float)*32768). See ```metric_code/metric_use_simple.py``` for an example.
 
 ## Quick Start
 Installing the metric (DPAM - perceptual audio similarity metric)
