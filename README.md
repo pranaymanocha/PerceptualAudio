@@ -38,6 +38,7 @@ Additional notes:
 - Required software (for resampling): [SoX](http://sox.sourceforge.net/), [FFmpeg](https://www.ffmpeg.org/).
 - Important note: At the moment, this algorithm requires using 32-bit floating-point audio files to perform correctly. You can use sox to convert your file.
 - Tested on Nvidia GeForce RTX 2080 GPU with Cuda (>=9.2) and CuDNN (>=7.3.0). CPU mode should also work with minor changes.
+- The current pretrained models support **sr=22050Hz**. Please make sure to resample your files first before using the metric.
 
 
 ## There are two ways to run the code:
@@ -55,7 +56,7 @@ Follow the instructions below to: 1) Evaluate the metric on a few examples, 2) T
 
 ### Minimal basic usage as a distance metric
 
-Running the command below takes two audio files as input and gives the perceptual distance between the files. It should return **distance = 0.1928**. 
+Running the command below takes two audio files as input and gives the perceptual distance between the files. It should return (approx)**distance = 0.1929**. Some GPU's are non-deterministic, and so the distance could vary in the lsb.
 
 ```
 cd metric_code
