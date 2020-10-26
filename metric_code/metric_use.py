@@ -13,6 +13,7 @@ import argparse
 from network_model import *
 from helper import *
 import argparse
+import librosa
 
 def argument_parser():
     """
@@ -53,13 +54,17 @@ def load_full_data(dataset):
     for id in tqdm(range(len(dataset['all']['inname']))):
 
         if dataset['all']['inaudio'][id] is None:
-
-            fs, inputData  = wavfile.read(dataset['all']['inname'][id])
-            fs, outputData  = wavfile.read(dataset['all']['outname'][id])
+            
+            inputData, sr = librosa.load(dataset['all']['inname'][id],sr=22050)
+            outputData, sr = librosa.load(dataset['all']['outname'][id],sr=22050)
+            
+            ## convert to 16 bit floating point
+            inputData = np.round(inputData.astype(np.float)*32768)
+            outputData = np.round(outputData.astype(np.float)*32768)
 
             inputData_wav  = np.reshape(inputData, [-1, 1])
             outputData_wav  = np.reshape(outputData, [-1, 1])
-
+            
             shape_wav = np.shape(inputData_wav)
             shape_wav1 = np.shape(outputData_wav)
 

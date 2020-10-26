@@ -8,6 +8,11 @@ Accepted at [Interspeech 2020](https://arxiv.org/abs/2001.04460)
 
 This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (DPAM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
+## Things to note:
+1) At the moment, this algorithm requires using 16-bit PCM audio files to perform correctly. You can use sox to convert your file.
+2) The current pretrained models support sr=22050Hz. Please make sure to resample your files first before using the metric.
+For ease, you can load your audio clip using librosa.load(filename,sr=22050) and then rescale to [-32768 to 32768] using np.round(audio_file.astype(np.float)*32768). See 'metric_code/metric_use_simple.py' for an example.
+
 ## Quick Start
 Installing the metric (DPAM - perceptual audio similarity metric)
 ```bash

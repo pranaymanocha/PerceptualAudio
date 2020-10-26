@@ -13,6 +13,7 @@ import argparse
 from network_model import *
 from helper import *
 import argparse
+import librosa
 
 def argument_parser():
     """
@@ -29,18 +30,6 @@ def argument_parser():
 args = argument_parser().parse_args()
 
 #sample loading the audio files in a dictionary. '4.wav is perceptually farther than 2.wav from ref.wav.'
-
-def check_wav_mp3(filename):
-    count=0
-    ext=filename[-3:]
-    if ext!='wav':
-        count+=1
-    return count
-
-def convert_mp3_wav(filename,seconds,id,fileid): 
-    
-    outfile=str(seconds)+'_'+str(id)+'_'+str(fileid)+'.wav'
-    subprocess.call(['ffmpeg', '-i', filename,'-ar','16000',outfile])
 
 
 def load_full_data_list(args): # check change path names
@@ -67,35 +56,13 @@ def load_full_data(dataset):
 
         if dataset['all']['inaudio'][id] is None:
             
-            #check if its a wav file: otherwise use ffmpeg to convert to a wav file
+            inputData, sr = librosa.load(dataset['all']['inname'][id],sr=22050)
+            outputData, sr = librosa.load(dataset['all']['outname'][id],sr=22050)
             
-            check=check_wav_mp3(dataset['all']['inname'][id])
-                
-            if check!=0:
-                #not wav
-                seconds = time.time()
-
-                convert_mp3_wav(dataset['all']['inname'][id],seconds,id,0)
-                convert_mp3_wav(dataset['all']['outname'][id],seconds,id,1)
-
-                outfile1=str(seconds)+'_'+str(id)+'_'+str(0)+'.wav'
-                outfile2=str(seconds)+'_'+str(id)+'_'+str(1)+'.wav'
-
-                fs, inputData  = wavfile.read(outfile1)
-                fs, outputData = wavfile.read(outfile2)
-
-                os.remove(outfile1)
-                os.remove(outfile2)
-
-            else:
-                #wav
-
-                fs, inputData  = wavfile.read(dataset['all']['inname'][id])
-                fs, outputData = wavfile.read(dataset['all']['outname'][id]) 
+            ## convert to 16 bit floating point
+            inputData = np.round(inputData.astype(np.float)*32768)
+            outputData = np.round(outputData.astype(np.float)*32768)
             
-            #fs, inputData  = wavfile.read(dataset['all']['inname'][id])
-            #fs, outputData  = wavfile.read(dataset['all']['outname'][id])
-
             inputData_wav  = np.reshape(inputData, [-1, 1])
             outputData_wav  = np.reshape(outputData, [-1, 1])
 
