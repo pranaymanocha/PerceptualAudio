@@ -8,6 +8,13 @@ Accepted at [Interspeech 2020](https://arxiv.org/abs/2001.04460)
 
 This is a Tensorflow implementation (a pytorch implementation is [here](https://github.com/adrienchaton/PerceptualAudio_pytorch)) of our audio perceptual metric. It contains (0) minimal code to run our perceptual metric (DPAM), (1) code to train the perceptual metric on our JND dataset, and (2) an example of using our perceptual metric as a loss function for speech denoising.
 
+
+## Also checkout our newest learned metric: CDPAM: Contrastive learning based deep perceptual audio similarity metric
+Please see ```cd cdpam``` and follow the instructions in the readme. We also provide pretrained models for:
+1) We make use of CDPAM for training a waveform synthesis model. We use the codebase from [here](https://github.com/descriptinc/melgan-neurips). We train both single and cross-speaker models.
+
+2) Real-time speech enhancement: We make use of CDPAM as a loss function for training an SE model. We use the codebase from [here](https://github.com/facebookresearch/denoiser). We just augment CDPAM to their loss for training.
+
 ## Things to note:
 1) At the moment, this algorithm requires using 16-bit PCM audio files to perform correctly. You can use sox to convert your file.
 2) The current pretrained models support sr=22050Hz. Please make sure to resample your files first before using the metric.
