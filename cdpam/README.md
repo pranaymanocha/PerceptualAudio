@@ -28,7 +28,7 @@ Please also run ``` pip install -r requirements.txt``` to install all the requir
 Using the metric is as simple as: 
 ```bash
 import cdpam
-loss_fn = cdpam.DPAM()
+loss_fn = cdpam.CDPAM()
 wav_ref = cdpam.load_audio('sample_audio/ref.wav')
 wav_out = cdpam.load_audio('sample_audio/2.wav')
 
