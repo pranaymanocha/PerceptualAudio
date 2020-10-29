@@ -1,9 +1,12 @@
 # Contrastive learning-based Deep Perceptual Audio Metric (CDPAM) 
-[[Speech enhanced Examples]](https://percepaudio.cs.princeton.edu/Manocha20_CDPAM/clips/clips_se.php)
+
+[[Real-time Speech Enhanced Examples]](https://percepaudio.cs.princeton.edu/Manocha20_CDPAM/clips/clips_se.php)
 
 [[MelGAN Single Speaker enhanced Examples]](https://percepaudio.cs.princeton.edu/Manocha20_CDPAM/clips/clips_mel_single.php)
 
 [[MelGAN Cross Speaker enhanced Examples]](https://percepaudio.cs.princeton.edu/Manocha20_CDPAM/clips/clips_mel_cross.php)
+
+[Pretrained SE + Vocoder trained models](https://percepaudio.cs.princeton.edu/Manocha20_CDPAM/mel_se.zip)
 
 **Contrastive Learning based Perceptual Audio Similarity**
 
