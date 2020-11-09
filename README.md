@@ -52,7 +52,7 @@ Additional notes:
 ## There are two ways to run the code:
 
 ### Using pip
-This version currently supports **evaluating** the trained metric, as well as using the metric for **backpropogation(as a loss function)**. This version currently does not support a simple interface to **train** the metric. For training, please clone this repo and follow the instructions below.
+This version currently supports **evaluating** the trained metric as a loss function. This version currently does not support a simple interface to **backpropogate and train** the metric. For training, please clone this repo and follow the instructions below.
 ```bash
 pip install dpam
 ```
