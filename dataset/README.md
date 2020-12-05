@@ -1,6 +1,19 @@
 # Perceptual Metrics of Audio JND Dataset
 
-## Citation
+
+## Update: (download entire dataset using a numpy saved array: Contains 67023 paired comparisons)
+Format of the file: 16bit PCM samples (in range from [-32768 to 32768], sampled at **sr=16KHz**)
+Download the .npy file from [here ~21G](http://percepaudio.cs.princeton.edu/icassp2020_perceptual/data_saved.npy)
+Load the .npy file like this:
+```bash
+import numpy as np
+dataset = np.load('data_saved.npy',allow_pickle=True,encoding="latin1")
+```
+Each row is arranged as a separate comparison: 
+```bash
+<audio 1, audio 2, judgment>
+```
+Everything else follows as before.
 
 
 ## Downloading the dataset
