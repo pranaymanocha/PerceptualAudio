@@ -37,3 +37,20 @@ wav_out = cdpam.load_audio('sample_audio/2.wav')
 
 dist = loss_fn.forward(wav_ref,wav_out)
 ```
+
+### Citation
+
+If you use our metric for research, please use the following to cite.
+
+```
+@inproceedings{Manocha:2021:CCL,
+   author = "Pranay Manocha and Zeyu Jin and Richard Zhang and Adam Finkelstein",
+   title = "{CDPAM}: Contrastive learning for perceptual audio similarity",
+   booktitle = "ICASSP 2021, To Appear",
+   year = "2021",
+   month = jun
+}
+```
+
+### License
+The source code is published under the [MIT license](https://choosealicense.com/licenses/mit/). See LICENSE for details. In general, you can use the code for any purpose with proper attribution. If you do something interesting with the code, we'll be happy to know. Feel free to contact us. The primary contact is Pranay Manocha.<br/>
