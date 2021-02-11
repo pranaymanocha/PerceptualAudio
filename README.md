@@ -1,5 +1,5 @@
 # Deep Perceptual Audio Metric (DPAM) [[Paper]](https://arxiv.org/abs/2001.04460) [[Webpage]](https://pixl.cs.princeton.edu/pubs/Manocha_2020_ADP/) [[Teaser]](https://youtu.be/dSh5SrMeyPQ) [[Full Video]](https://youtu.be/yOceeut_4Gg)
-# Also checkout our newer improved metric: [[CDPAM]](https://github.com/pranaymanocha/PerceptualAudio/tree/master/cdpam) [[Paper]](https://arxiv.org/abs/2102.05109)  [[Website]](https://pixl.cs.princeton.edu/pubs/Manocha_2021_CCL/index.php)
+# Also checkout our newer improved metric: [[CDPAM]](https://github.com/pranaymanocha/PerceptualAudio/tree/master/cdpam) [[Paper]](https://arxiv.org/abs/2102.05109) [[Website]](https://pixl.cs.princeton.edu/pubs/Manocha_2021_CCL/index.php)
 
 **A Differentiable Perceptual Audio Metric Learned from Just Noticeable Differences**  
 [Pranay Manocha](https://www.cs.princeton.edu/~pmanocha/), [Adam Finkelstein](https://www.cs.princeton.edu/~af/), [Richard Zhang](http://richzhang.github.io/), [Nicholas J. Bryan](https://ccrma.stanford.edu/~njb/), [Gautham J. Mysore](https://ccrma.stanford.edu/~gautham/Site/Gautham_J._Mysore.html), [Zeyu Jin](https://research.adobe.com/person/zeyu-jin/)  
