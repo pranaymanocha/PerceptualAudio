@@ -1,4 +1,4 @@
-# Contrastive learning-based Deep Perceptual Audio Metric (CDPAM) 
+# Contrastive learning-based Deep Perceptual Audio Metric [[CDPAM]](https://github.com/pranaymanocha/PerceptualAudio/tree/master/cdpam) [[Paper]](https://arxiv.org/abs/2102.05109) [[Website]](https://pixl.cs.princeton.edu/pubs/Manocha_2021_CCL/index.php)
 
 [[Real-time Speech Enhanced Examples]](https://percepaudio.cs.princeton.edu/Manocha20_CDPAM/clips/clips_se.php)
 
