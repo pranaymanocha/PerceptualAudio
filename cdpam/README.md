@@ -26,7 +26,7 @@ Installing the metric (CDPAM - perceptual audio similarity metric)
 ```bash
 pip install cdpam
 ```
-Please also run ``` pip install -r requirements.txt``` to install all the requirements required to run the metric.
+Please also run ``` pip install -r requirements.txt``` to install all the requirements required to run the metric. Please make sure to install the latest version of cdpam.
 
 Using the metric is as simple as: 
 ```bash
@@ -36,6 +36,10 @@ wav_ref = cdpam.load_audio('sample_audio/ref.wav')
 wav_out = cdpam.load_audio('sample_audio/2.wav')
 
 dist = loss_fn.forward(wav_ref,wav_out)
+```
+You can pass the device you want to run the metric on (e.g., 'cpu' or 'cuda:0') while calling metric like this: 
+```bash 
+loss_fn = cdpam.CDPAM(dev='cuda:0')
 ```
 
 ### Citation
