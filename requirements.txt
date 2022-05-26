@@ -1,4 +1,4 @@
-tensorflow-gpu==1.14
+tensorflow-gpu==2.7.2
 scikit-learn==0.20.3
 scipy==1.2.1
 tqdm==4.32.2
